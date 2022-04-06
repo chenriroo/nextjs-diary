@@ -1,0 +1,22 @@
+.sliderPanel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column;
+
+	&--collapse {
+
+	}
+}
+
+
+.datePicker {
+	display: flex;
+}
+
+.entries {
+	display: flex;
+	&__column {
+
+	}
+}

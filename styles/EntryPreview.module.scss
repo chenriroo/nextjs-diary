@@ -1,0 +1,27 @@
+.entryPreview {
+	display: flex;
+	width: 7rem;
+	height: 3rem;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 4px;
+	box-shadow: 0 0 7px 0 rgb(220 220 220);
+
+	&__day {
+		flex: 3;
+		border-radius: 4px;
+		&:hover {
+			background-color: rgba(118, 178, 228, 0.3);
+		}
+	}
+
+	&__create {
+		flex: 1;
+		text-align: center;
+		line-height: 3rem;
+		border-radius: 4px;
+		&:hover {
+			background-color: rgba(118, 178, 228, 0.3);
+		}
+	}
+}
