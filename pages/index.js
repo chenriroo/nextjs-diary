@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import Main from '../components/Main'
+import Entry from '../components/Entry'
 import Navigation from '../components/Navigation'
 import styles from '../styles/Home.module.scss'
 
 
 export default function Home() {
-	const [curEntry, setCurEntry] = useState([])
+	const [curEntry, setCurEntry] = useState({})
 	const [isLoading, setLoading] = useState(false)
+
+	function handleSelectEntry(e,entry) {
+		setCurEntry(entry)
+	}
+
+	function handleCreateEntry() {
+		//console.log('handleCreateEntry()')
+	}
 
 	return (
 		<div className={styles.container}>
@@ -18,12 +26,15 @@ export default function Home() {
 			</Head>
 
 
-			<Main
-				entry={{id:10, title:'title of post', content:'content of post'}}
+			<Entry
+				entry={curEntry}
 			/>
 			
 			<Navigation 
-				fetchMonth='placeHolder'/>
+				fetchMonth='placeHolder'
+				handleSelectEntry={handleSelectEntry}
+				handleCreateEntry={handleCreateEntry}
+			/>
 		</div>
 	)
 }

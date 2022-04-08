@@ -1,6 +1,6 @@
 .entryPreview {
 	display: flex;
-	width: 7rem;
+	width: 8rem;
 	height: 3rem;
 	background-color: white;
 	cursor: pointer;
@@ -8,11 +8,18 @@
 	box-shadow: 0 0 7px 0 rgb(220 220 220);
 
 	&__day {
+		position: absolute;
 		flex: 3;
 		border-radius: 4px;
 		&:hover {
 			background-color: rgba(118, 178, 228, 0.3);
 		}
+	}
+
+	&__content {
+		flex: 3;
+		padding-left: 2rem;
+		background-color: rgba(255, 173, 173, 0.233);
 	}
 
 	&__create {

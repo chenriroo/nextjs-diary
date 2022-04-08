@@ -3,11 +3,11 @@ import formatTime from '../utils/formatTime'
 import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
 
-export default function Navigation({fetchMonth}) {
+export default function Navigation({fetchMonth, handleSelectEntry, handleCreateEntry}) {
 	const [entries, setEntries]= useState([])
 	const [curDate, setCurDate] = useState({
-		month: '',
-		year: ''
+		year: '',
+		month: ''
 	})
 
 
@@ -19,18 +19,20 @@ export default function Navigation({fetchMonth}) {
 		})
 	}
 
-	const fetchEntries = async () => {
-		const date = `${curDate.year}-${curDate.month}`
-		//const res = await fetch(`http://localhost:5000/entries?date_like=${date}`);
-		const res = await fetch(`http://localhost:3000/api/entries`)
-		const data = await res.json();
 
-		setEntries(formatTime(data).map(entry => entry))
-		console.log(entries)
-	}
 
 	useEffect(() => {
 		if(!curDate.month || !curDate.year) return
+
+		const fetchEntries = async () => {
+			const date = `${curDate.year}-${curDate.month}`
+			//const res = await fetch(`http://localhost:5000/entries?date_like=${date}`);
+			const res = await fetch(`/api/entries`)
+			const data = await res.json();
+	
+			setEntries(formatTime(data).map(entry => entry))
+		}
+
 		fetchEntries();
 	},[curDate.month, curDate.year]);
 
@@ -46,7 +48,13 @@ export default function Navigation({fetchMonth}) {
 	return (
 		<nav className={styles.navigation}>
 
-			<PanelSlider fetchMonth={fetchMonth} entries={entries} inputDate={inputDate}/>
+			<PanelSlider
+				fetchMonth={fetchMonth}
+				entries={entries}
+				inputDate={inputDate}
+				handleSelectEntry={handleSelectEntry}
+				handleCreateEntry={handleCreateEntry}
+			/>
 
 			<div className={styles.menubar}>
 				<button onClick={clickHome}>Home</button>

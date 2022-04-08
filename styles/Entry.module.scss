@@ -3,5 +3,39 @@
 	flex-flow: column;
 	width: 50rem;
 	height: 100%;
-	border: 1px solid red;
+	padding: 2rem;
+	margin: 1rem;
+	background-color: #fff;
+	box-shadow: 0 0 7px 0 rgb(220 220 220);
+
+	&__settings {
+		display: flex;
+		justify-content: flex-end;
+		background-color: rgba(0, 0, 255, 0.068);
+	}
+
+	&__content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+	
+}
+
+
+.date, .time {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	width: 10rem;
+}
+
+
+.textarea {
+	height: 100%;
+	resize: none;
+}
+
+.btn {
+	padding: 1rem;
+	background-color: #fff;
+	//border-radius: 4px;
 }
