@@ -1,16 +1,21 @@
 import { useState, useEffect} from "react";
 import styles from "../styles/Entry.module.scss"
 
-export default function Entry({ entry }) {
+export default function Entry({ entry, updateEntry, deleteEntry }) {
 	const [isEditing, setEditMode] = useState(false);
-	const [date, setDate] = useState("")
+	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");
-	const [content, setContent] = useState(" ");
+	const [content, setContent] = useState("");
 
-	function edit() {
-		console.log('Entry.edit')
+	function handleUpdate(e) {
+		e.preventDefault();
+		updateEntry({
+			id: entry.id,
+			date: date,
+			time: time,
+			content: content
+		})
 	}
-	//console.log(date, time, content)
 
 	useEffect(() => {
 		setContent(entry.content)
@@ -37,6 +42,7 @@ export default function Entry({ entry }) {
 					value={content}
 					onChange={(e) => setContent(e.target.value)}>
 				</textarea>
+				<button onClick={(e) => handleUpdate(e)}>Update</button>
 			</form>
 	} else {
 		html = 
@@ -56,7 +62,11 @@ export default function Entry({ entry }) {
 					onClick={() => setEditMode(!isEditing)}>
 						{isEditing ? "View" : "Edit"}
 					</button>
-				<button className={styles.btn}>Delete</button>
+				<button
+					className={styles.btn}
+					onClick={() => deleteEntry(entry.id)}>
+					Delete
+				</button>
 			</div>
 
 			{html}

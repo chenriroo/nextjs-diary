@@ -5,8 +5,6 @@ import Navigation from '../components/Navigation'
 import styles from '../styles/Home.module.scss'
 import formatTime from '../utils/formatTime'
 
-
-
 export default function Home() {
 	const [curEntry, setCurEntry] = useState({})
 	const [entries, setEntries]= useState([])
@@ -38,15 +36,43 @@ export default function Home() {
 			})
 		})
 		const data = await res.json();
-		const foo = formatTime([data])
-		setCurEntry(...foo)
+		const formattedEntryObj = formatTime([data])
+		setCurEntry(...formattedEntryObj)
 	}
 
 	function handleSelectEntry(e,entry) {
 		setCurEntry(entry)
 	}
 
-	// Fetch entries on statechange
+	async function updateEntry(input) {
+		const strDate = new Date(`${input.date} ${input.time}`)
+		const objNewEntry = {
+			date: strDate,
+			content: input.content
+		}
+
+		const res = await fetch(`http://localhost:5000/entries/${input.id}`, {
+			method: 'PUT',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify(objNewEntry)
+		})
+		const data = await res.json();
+
+		const formattedEntryObj = formatTime([data])
+		setCurEntry(...formattedEntryObj)
+	}
+
+	async function deleteEntry(id) {
+		console.log('delete:',id)
+		await fetch(`http://localhost:5000/entries/${id}`, {
+			method: 'DELETE',
+		})
+		setCurEntry({});
+	}
+
+	// Fetch entries on state date
 	useEffect(() => {
 		if(!curDate.month || !curDate.year) return
 
@@ -60,7 +86,7 @@ export default function Home() {
 		}
 
 		fetchEntries();
-	},[curDate.month, curDate.year]);
+	},[curDate.month, curDate.year, curEntry]);
 
 
 	return (
@@ -71,7 +97,11 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{Object.keys(curEntry).length > 0 ? <Entry entry={curEntry}/> : undefined }
+			{Object.keys(curEntry).length > 0 ? 
+				<Entry 
+					entry={curEntry}
+					updateEntry={updateEntry}
+					deleteEntry={deleteEntry}/> : undefined }
 			
 			
 			<Navigation 
