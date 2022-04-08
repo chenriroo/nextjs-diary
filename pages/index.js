@@ -25,7 +25,7 @@ export default function Home() {
 		let hours = new Date().getHours();
 		let minutes = new Date().getMinutes();
 
-		const res = await fetch (`https://chenriroo-json-server-heroku.herokuapp.com/`, {
+		const res = await fetch (`https://chenriroo-json-server-heroku.herokuapp.com/entries/`, {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
@@ -51,7 +51,7 @@ export default function Home() {
 			content: input.content
 		}
 
-		const res = await fetch(`http://localhost:5000/entries/${input.id}`, {
+		const res = await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/entries/${input.id}`, {
 			method: 'PUT',
 			headers: {
 				'content-type': 'application/json'
@@ -66,7 +66,7 @@ export default function Home() {
 
 	async function deleteEntry(id) {
 		console.log('delete:',id)
-		await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/${id}`, {
+		await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/entries/${id}`, {
 			method: 'DELETE',
 		})
 		setCurEntry({});
