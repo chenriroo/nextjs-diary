@@ -80,15 +80,14 @@ export default function Entries({ entries, handleSelectEntry, handleCreateEntry 
 		
 	}
 
-	console.log(activeDay)
-
+	// Receive new 'entries' prop
 	useEffect(() => {
 		setArrData(prepareData(entries))
 	},[entries])
 
 	useEffect(() => {
 		console.log('Entries: state arrData has changed')
-		console.log(arrData)
+		//console.log(arrData)
 	}, [arrData])
 	
 

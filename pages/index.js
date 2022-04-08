@@ -14,7 +14,7 @@ export default function Home() {
 	}
 
 	function handleCreateEntry() {
-		//console.log('handleCreateEntry()')
+		console.log('handleCreateEntry()')
 	}
 
 	return (
@@ -31,7 +31,6 @@ export default function Home() {
 			/>
 			
 			<Navigation 
-				fetchMonth='placeHolder'
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
 			/>

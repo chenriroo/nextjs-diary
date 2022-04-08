@@ -3,7 +3,7 @@ import formatTime from '../utils/formatTime'
 import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
 
-export default function Navigation({fetchMonth, handleSelectEntry, handleCreateEntry}) {
+export default function Navigation({handleSelectEntry, handleCreateEntry}) {
 	const [entries, setEntries]= useState([])
 	const [curDate, setCurDate] = useState({
 		year: '',
@@ -49,7 +49,6 @@ export default function Navigation({fetchMonth, handleSelectEntry, handleCreateE
 		<nav className={styles.navigation}>
 
 			<PanelSlider
-				fetchMonth={fetchMonth}
 				entries={entries}
 				inputDate={inputDate}
 				handleSelectEntry={handleSelectEntry}

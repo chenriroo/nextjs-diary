@@ -1,3 +1,6 @@
+import styles from '../styles/Datepicker.module.scss'
+
+
 export default function DatePicker({ inputDate }) {
 
 	function generateYears() {
@@ -13,12 +16,12 @@ export default function DatePicker({ inputDate }) {
 	return (
 		<div>
 		<label>Year</label>
-		<select className="datepicker-year" name="year" onClick={inputDate}>
+		<select className={styles.dropdown} name="year" onClick={inputDate}>
 			{generateYears().map((year,index) => (<option key={index} value={year}>{year}</option>))}
 		</select>
 
 		<label>Month</label>
-		<select className="datepicker-month" name="month" onClick={inputDate}>
+		<select className={styles.dropdown} name="month" onClick={inputDate}>
 			<option value="01">January</option>
 			<option value="02">February</option>
 			<option value="03">March</option>
