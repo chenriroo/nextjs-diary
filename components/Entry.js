@@ -1,61 +1,62 @@
 import { useState, useEffect} from "react";
-import styling from "../styles/Entry.module.scss"
+import styles from "../styles/Entry.module.scss"
 
 export default function Entry({ entry }) {
 	const [isEditing, setEditMode] = useState(false);
-	const [date, setDate] = useState(entry.date)
-	const [time, setTime] = useState(entry.time);
-	const [content, setContent] = useState(entry.content);
+	const [date, setDate] = useState("")
+	const [time, setTime] = useState("");
+	const [content, setContent] = useState(" ");
 
 	function edit() {
 		console.log('Entry.edit')
 	}
-	console.log(date, time, content)
+	//console.log(date, time, content)
 
 	useEffect(() => {
 		setContent(entry.content)
 		setTime(entry.time)
 		setDate(entry.date)
 	},[entry])
-
+	
 	let html;
 	if(isEditing) {
 		html =
-			<form className={styling.entry__content}>
+			<form className={styles.entry__content}>
 				<input type="date"
-					className={styling.date}
+					className={styles.date}
 					readOnly
 					value={entry.date}>
 				</input>
 				<input type="time" 
-					className={styling.time}
+					className={styles.time}
 					value={entry.time}
 					onChange={(e) => setTime(e.target.value)}>
 				</input>
 				<textarea 
-					className={styling.textarea}
+					className={styles.textarea}
 					value={content}
 					onChange={(e) => setContent(e.target.value)}>
 				</textarea>
 			</form>
 	} else {
 		html = 
-		<div className={styling.entry__content}>
-			<input type="date" className={styling.date} defaultValue={entry.date} readOnly></input>
-			<input type="time" className={styling.time} defaultValue={entry.time} readOnly></input>
-			<p>{content}</p>
+		<div className={styles.entry__content}>
+			<h2>{date}, {time}</h2>
+			<p className={styles.paragraph}>{content}</p>
 		</div>
 	}
 
 	return (
-		<div className={styling.entry}>
-			<div className={styling.entry__settings}>
+
+		<div className={styles.entry}>
+
+			<div className={styles.entry__settings}>
 				<button 
-					className={styling.btn}
+					className={styles.btn}
 					onClick={() => setEditMode(!isEditing)}>
 						{isEditing ? "View" : "Edit"}
 					</button>
-				<button className={styling.btn}>Delete</button>
+				<button className={styles.btn}>Delete</button>
 			</div>
 
 			{html}

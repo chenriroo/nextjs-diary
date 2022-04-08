@@ -68,8 +68,6 @@ const prepareData = (entries) => {
 	return [arr1,arr2,arr3,arr4,arr5]
 }
 
-
-
 export default function Entries({ entries, handleSelectEntry, handleCreateEntry }) {
 	const [activeDay, setActiveDay] = useState(null);
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
@@ -80,16 +78,9 @@ export default function Entries({ entries, handleSelectEntry, handleCreateEntry 
 		
 	}
 
-	// Receive new 'entries' prop
 	useEffect(() => {
 		setArrData(prepareData(entries))
 	},[entries])
-
-	useEffect(() => {
-		console.log('Entries: state arrData has changed')
-		//console.log(arrData)
-	}, [arrData])
-	
 
 	return (
 		<div className={styles.entries}>

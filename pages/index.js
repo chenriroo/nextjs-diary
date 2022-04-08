@@ -3,19 +3,65 @@ import Head from 'next/head'
 import Entry from '../components/Entry'
 import Navigation from '../components/Navigation'
 import styles from '../styles/Home.module.scss'
+import formatTime from '../utils/formatTime'
+
 
 
 export default function Home() {
 	const [curEntry, setCurEntry] = useState({})
-	const [isLoading, setLoading] = useState(false)
+	const [entries, setEntries]= useState([])
+	const [curDate, setCurDate] = useState({
+		year: `${new Date().getFullYear()}`,
+		month: `${new Date().getMonth()}`
+	})
+
+	function inputDate(e) {
+		const target = e.target;
+		setCurDate({
+			...curDate,
+			[target.name]: target.value
+		})
+	}
+
+	async function handleCreateEntry(day) {
+		let hours = new Date().getHours();
+		let minutes = new Date().getMinutes();
+
+		const res = await fetch (`http://localhost:5000/entries`, {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				date: new Date(curDate.year, curDate.month-1, day, hours, minutes),
+				content: ""
+			})
+		})
+		const data = await res.json();
+		const foo = formatTime([data])
+		setCurEntry(...foo)
+	}
 
 	function handleSelectEntry(e,entry) {
 		setCurEntry(entry)
 	}
 
-	function handleCreateEntry() {
-		console.log('handleCreateEntry()')
-	}
+	// Fetch entries on statechange
+	useEffect(() => {
+		if(!curDate.month || !curDate.year) return
+
+		const fetchEntries = async () => {
+			const date = `${curDate.year}-${curDate.month}`
+			const res = await fetch(`http://localhost:5000/entries?date_like=${date}`);
+			//const res = await fetch(`/api/entries`)
+			const data = await res.json();
+	
+			setEntries(formatTime(data).map(entry => entry))
+		}
+
+		fetchEntries();
+	},[curDate.month, curDate.year]);
+
 
 	return (
 		<div className={styles.container}>
@@ -25,14 +71,14 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-
-			<Entry
-				entry={curEntry}
-			/>
+			{Object.keys(curEntry).length > 0 ? <Entry entry={curEntry}/> : undefined }
+			
 			
 			<Navigation 
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
+				inputDate={inputDate}
+				entries={entries}
 			/>
 		</div>
 	)

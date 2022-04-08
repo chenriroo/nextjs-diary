@@ -11,7 +11,7 @@ export default function EntryPreview({
 			toggleActiveDay(e, entry.day)
 			handleSelectEntry(e,entry)
 		} else if(e.target.dataset.fn === 'create') {
-			handleCreateEntry()
+			handleCreateEntry(entry.day)
 		}
 	}
 
