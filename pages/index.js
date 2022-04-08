@@ -25,7 +25,7 @@ export default function Home() {
 		let hours = new Date().getHours();
 		let minutes = new Date().getMinutes();
 
-		const res = await fetch (`http://localhost:5000/entries`, {
+		const res = await fetch (`https://chenriroo-json-server-heroku.herokuapp.com/`, {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json'
@@ -66,7 +66,7 @@ export default function Home() {
 
 	async function deleteEntry(id) {
 		console.log('delete:',id)
-		await fetch(`http://localhost:5000/entries/${id}`, {
+		await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/${id}`, {
 			method: 'DELETE',
 		})
 		setCurEntry({});
@@ -78,7 +78,7 @@ export default function Home() {
 
 		const fetchEntries = async () => {
 			const date = `${curDate.year}-${curDate.month}`
-			const res = await fetch(`http://localhost:5000/entries?date_like=${date}`);
+			const res = await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/entries?date_like=${date}`);
 			//const res = await fetch(`/api/entries`)
 			const data = await res.json();
 	
