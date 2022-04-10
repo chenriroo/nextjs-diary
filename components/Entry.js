@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react";
 import styles from "../styles/Entry.module.scss"
 
-export default function Entry({ entry, updateEntry, deleteEntry }) {
+export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	const [isEditing, setEditMode] = useState(false);
 	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");

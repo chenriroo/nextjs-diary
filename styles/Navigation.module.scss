@@ -4,9 +4,11 @@
 	flex-flow: column;
 	justify-content: center;
 	background-color: #414141;
+	z-index: 20;
 }
 
 .menubar {
+	flex: 0 0 3rem;
 	display: flex;
 	flex-flow: row;
 	justify-content: center;

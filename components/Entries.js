@@ -68,7 +68,10 @@ const prepareData = (entries) => {
 	return [arr1,arr2,arr3,arr4,arr5]
 }
 
-export default function Entries({ entries, handleSelectEntry, handleCreateEntry }) {
+export default function Entries({
+	entries, handleSelectEntry, handleCreateEntry, isFetching
+	}) {
+
 	const [activeDay, setActiveDay] = useState(null);
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
 
@@ -82,7 +85,18 @@ export default function Entries({ entries, handleSelectEntry, handleCreateEntry 
 		setArrData(prepareData(entries))
 	},[entries])
 
+
+	const markupFetching = <div className={styles.loading}></div>
+
+	// if(isFetching) {
+	// 	return <div className={styles.loading}>
+	// 		fetching entries
+	// 	</div>
+	// }
+
 	return (
+		
+
 		<div className={styles.entries}>
 
 			<div className={styles.entries__column}>
@@ -149,6 +163,8 @@ export default function Entries({ entries, handleSelectEntry, handleCreateEntry 
 					/>
 					))}
 			</div>
+			
+			{isFetching ? markupFetching : null}
 
 		</div>
 	)

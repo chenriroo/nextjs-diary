@@ -14,7 +14,7 @@ export default function DatePicker({ inputDate }) {
 
 
 	return (
-		<div>
+		<div className={styles.datepicker}>
 		<label>Year</label>
 		<select className={styles.dropdown} name="year" onClick={inputDate}>
 			{generateYears().map((year,index) => (<option key={index} value={year}>{year}</option>))}

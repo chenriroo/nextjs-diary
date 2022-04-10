@@ -3,7 +3,9 @@ import styles from '../styles/PanelSlider.module.scss';
 import DatePicker from './Datepicker';
 import Entries from './Entries';
 
-export default function SliderMenu({entries, inputDate, handleSelectEntry, handleCreateEntry}) {
+export default function SliderMenu({
+	entries, inputDate, handleSelectEntry, handleCreateEntry, isFetching
+	}) {
 
 
 
@@ -16,6 +18,7 @@ export default function SliderMenu({entries, inputDate, handleSelectEntry, handl
 				entries={entries}
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
+				isFetching={isFetching}
 			/>
 
 		</div>

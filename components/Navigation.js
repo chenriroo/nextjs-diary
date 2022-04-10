@@ -4,15 +4,9 @@ import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, entries
+	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching
 }) {
 	
-
-
-	function clickHome() {
-		console.log('click home')
-	}
-
 	function toggleNavigation() {
 		console.log('toggleNavigation')	
 	}
@@ -25,10 +19,10 @@ export default function Navigation({
 				inputDate={inputDate}
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
+				isFetching={isFetching}
 			/>
 
 			<div className={styles.menubar}>
-				<button onClick={clickHome}>Home</button>
 				<button onClick={toggleNavigation}>Entries</button>
 			</div>
 

@@ -1,11 +1,13 @@
 .sliderPanel {
+	position: absolute;
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
 	align-items: center;
-	padding: 2rem;
+	width: 100%;
+	bottom: 3rem;
 	background-color: #f5f5f5;
-	
+	z-index: 10;
 
 	&--collapse {
 
