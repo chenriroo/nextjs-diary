@@ -7,6 +7,8 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	const [time, setTime] = useState("");
 	const [content, setContent] = useState("");
 
+	let htmlEntry, htmlEmpty;
+
 	function handleUpdate(e) {
 		e.preventDefault();
 		updateEntry({
@@ -22,10 +24,28 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 		setTime(entry.time)
 		setDate(entry.date)
 	},[entry])
-	
-	let html;
-	if(isEditing) {
-		html =
+
+
+	const htmlSettings = 
+		<div className={styles.entry__settings}>
+			<button 
+				className={styles.btn}
+				onClick={() => setEditMode(!isEditing)}>
+					{isEditing ? "View" : "Edit"}
+				</button>
+			<button
+				className={styles.btn}
+				onClick={() => deleteEntry(entry.id)}>
+				Delete
+			</button>
+		</div>
+
+	if(entry.type == "empty") {
+		htmlEmpty =
+			<div>Nothing to see here</div>
+		console.log('No entry so display something else')
+	} else if(isEditing) {
+		htmlEntry =
 			<form className={styles.entry__content}>
 				<input type="date"
 					className={styles.date}
@@ -44,8 +64,8 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 				</textarea>
 				<button onClick={(e) => handleUpdate(e)}>Update</button>
 			</form>
-	} else {
-		html = 
+	} else if(!isEditing) {
+		htmlEntry = 
 		<div className={styles.entry__content}>
 			<h2>{date}, {time}</h2>
 			<p className={styles.paragraph}>{content}</p>
@@ -53,23 +73,9 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	}
 
 	return (
-
 		<div className={styles.entry}>
-
-			<div className={styles.entry__settings}>
-				<button 
-					className={styles.btn}
-					onClick={() => setEditMode(!isEditing)}>
-						{isEditing ? "View" : "Edit"}
-					</button>
-				<button
-					className={styles.btn}
-					onClick={() => deleteEntry(entry.id)}>
-					Delete
-				</button>
-			</div>
-
-			{html}
+			{htmlSettings}
+			{entry.type === 'empty' ? htmlEmpty : htmlEntry}
 		</div>
 	)
 
