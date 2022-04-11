@@ -4,7 +4,6 @@
 	flex-flow: column;
 	justify-content: center;
 	background-color: #414141;
-	z-index: 20;
 }
 
 .menubar {
@@ -12,4 +11,6 @@
 	display: flex;
 	flex-flow: row;
 	justify-content: center;
+	z-index: 10;
+	background-color: #414141;
 }

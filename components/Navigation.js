@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
@@ -6,10 +6,9 @@ import PanelSlider from './PanelSlider'
 export default function Navigation({
 	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching
 }) {
+	const [isHidden, setMenu] = useState(false)
 	
-	function toggleNavigation() {
-		console.log('toggleNavigation')	
-	}
+	console.log(isHidden)
 
 	return (
 		<nav className={styles.navigation}>
@@ -20,10 +19,11 @@ export default function Navigation({
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
 				isFetching={isFetching}
+				isHidden={isHidden}
 			/>
 
 			<div className={styles.menubar}>
-				<button onClick={toggleNavigation}>Entries</button>
+				<button onClick={() => setMenu(!isHidden)}>Entries</button>
 			</div>
 
 		</nav>

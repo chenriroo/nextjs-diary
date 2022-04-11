@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import EntryPreview from "./EntryPreview"
+import Loading from "./Loading";
 import styles from "../styles/Entries.module.scss"
 
 // Find a way to add 'type:'single' to days that have a single entry
@@ -77,26 +78,15 @@ export default function Entries({
 
 	function toggleActiveDay(e, day) {
 		console.log('Entries.toggleActiveDay()')
-		setActiveDay(day)
-		
+		setActiveDay(day)	
 	}
 
 	useEffect(() => {
 		setArrData(prepareData(entries))
 	},[entries])
 
-
-	const markupFetching = <div className={styles.loading}></div>
-
-	// if(isFetching) {
-	// 	return <div className={styles.loading}>
-	// 		fetching entries
-	// 	</div>
-	// }
-
 	return (
 		
-
 		<div className={styles.entries}>
 
 			<div className={styles.entries__column}>
@@ -163,8 +153,13 @@ export default function Entries({
 					/>
 					))}
 			</div>
+
 			
-			{isFetching ? markupFetching : null}
+			
+			{isFetching && <Loading text="entries"/>}
+
+
+
 
 		</div>
 	)

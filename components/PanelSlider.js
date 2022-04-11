@@ -1,16 +1,13 @@
-import { useState } from 'react';
 import styles from '../styles/PanelSlider.module.scss';
 import DatePicker from './Datepicker';
 import Entries from './Entries';
 
 export default function SliderMenu({
-	entries, inputDate, handleSelectEntry, handleCreateEntry, isFetching
+	entries, inputDate, handleSelectEntry, handleCreateEntry, isFetching, isHidden
 	}) {
 
-
-
 	return (
-		<div className={styles.sliderPanel}>
+		<div className={`${styles.sliderPanel} ${isHidden ? styles.collapse : ''}`}>
 
 			<DatePicker inputDate={inputDate} />
 
