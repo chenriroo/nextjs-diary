@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import EntryPreview from "./EntryPreview"
+import Loading from "./Loading";
 import styles from "../styles/Entries.module.scss"
 
 // Find a way to add 'type:'single' to days that have a single entry
@@ -7,17 +8,17 @@ const filterDayMultiEntries = (entries) => {
 	const objDays = [];	// array with object of a day with multiple entries
 	const arrDays = []; // Array with day(s) having multiple entries
 	for(let i=1; i<=31; i++) {
-		let foo={
+		let multiEntry={
 			day: i,
 			type: 'multi', 
 			entries: []
 		};
 		entries.filter(entry => {
-			if(entry.day === i) foo.entries.push(entry)	
+			if(entry.day === i) multiEntry.entries.push(entry)	
 		})
-		if(foo.entries.length>1) {
-			objDays.push(foo);
-			arrDays.push(foo.day)
+		if(multiEntry.entries.length>1) {
+			objDays.push(multiEntry);
+			arrDays.push(multiEntry.day)
 		}
 	}
 	return [arrDays, objDays];
@@ -46,6 +47,11 @@ const prepareData = (entries) => {
 		.filter(entry => !arrDaysMultipleEntries.includes(entry.day))
 		.concat(arrObjectsDaysMultipleEntries, arrPlaceholders)
 		.sort((a,b) => a.day-b.day)
+		.map(entry => {
+			if(!entry.hasOwnProperty('type')) {
+				return { ...entry, type: 'single' }
+			} else return { ...entry }
+		} )
 
 	arrEntries.forEach(entry => {
 		if(entry.day <=7) {
@@ -63,64 +69,97 @@ const prepareData = (entries) => {
 	return [arr1,arr2,arr3,arr4,arr5]
 }
 
+export default function Entries({
+	entries, handleSelectEntry, handleCreateEntry, isFetching
+	}) {
 
+	const [activeDay, setActiveDay] = useState(null);
+	const [arrData, setArrData] = useState([[],[],[],[],[]])
 
-export default function Entries({ entries }) {
-	const [arrData, setArrData] = useState([])
-	const [selectedEntry, setSelectedEntry] = useState({})
+	function toggleActiveDay(e, day) {
+		console.log('Entries.toggleActiveDay()')
+		setActiveDay(day)	
+	}
 
-	//console.log('propEntries:', entries)
-	const arrEntries = prepareData(entries)
-	// console.log('arrEntries', arrEntries)
-	
+	useEffect(() => {
+		setArrData(prepareData(entries))
+	},[entries])
 
 	return (
+		
 		<div className={styles.entries}>
 
 			<div className={styles.entries__column}>
-				{arrEntries[0].map((entry,id) => (
+				{arrData[0].map((entry) => (
 					<EntryPreview 
-						key={id}
-						entry={entry}	
+						key={entry.day}
+						entry={entry}
+						handleSelectEntry={handleSelectEntry}
+						handleCreateEntry={handleCreateEntry}
+						toggleActiveDay={toggleActiveDay}
+						isActive={activeDay===entry.day ? true : false}
 					/>
 				))}
 			</div>
 
 			<div className={styles.entries__column}>
-				{arrEntries[1].map((entry,id) => (
+				{arrData[1].map((entry) => (
 					<EntryPreview 
-						key={id}
-						entry={entry}	
+						key={entry.day}
+						entry={entry}
+						handleSelectEntry={handleSelectEntry}
+						handleCreateEntry={handleCreateEntry}
+						toggleActiveDay={toggleActiveDay}
+						isActive={activeDay===entry.day ? true : false}
 					/>
 					))}
 			</div>
 
 			<div className={styles.entries__column}>
-				{arrEntries[2].map((entry,id) => (
+				{arrData[2].map((entry) => (
 						<EntryPreview 
-						key={id}
-						entry={entry}	
+						key={entry.day}
+						entry={entry}
+						handleSelectEntry={handleSelectEntry}
+						handleCreateEntry={handleCreateEntry}
+						toggleActiveDay={toggleActiveDay}
+						isActive={activeDay===entry.day ? true : false}
 					/>
 					))}
 			</div>
 
 			<div className={styles.entries__column}>
-				{arrEntries[3].map((entry,id) => (
+				{arrData[3].map((entry) => (
 						<EntryPreview 
-						key={id}
-						entry={entry}	
+						key={entry.day}
+						entry={entry}
+						handleSelectEntry={handleSelectEntry}
+						handleCreateEntry={handleCreateEntry}
+						toggleActiveDay={toggleActiveDay}
+						isActive={activeDay===entry.day ? true : false}
 					/>
 					))}
 			</div>
 
 			<div className={styles.entries__column}>
-				{arrEntries[4].map((entry,id) => (
+				{arrData[4].map((entry) => (
 						<EntryPreview 
-						key={id}
-						entry={entry}	
+						key={entry.day}
+						entry={entry}
+						handleSelectEntry={handleSelectEntry}
+						handleCreateEntry={handleCreateEntry}
+						toggleActiveDay={toggleActiveDay}
+						isActive={activeDay===entry.day ? true : false}
 					/>
 					))}
 			</div>
+
+			
+			
+			{isFetching && <Loading text="entries"/>}
+
+
+
 
 		</div>
 	)

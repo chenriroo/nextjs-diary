@@ -3,5 +3,61 @@
 	flex-flow: column;
 	width: 50rem;
 	height: 100%;
-	border: 1px solid red;
+	padding: 2rem;
+	margin: 1rem;
+	background-color: #fff;
+	box-shadow: 0 0 7px 0 rgb(220 220 220);
+
+	&__settings {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	&__content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+	
+}
+
+
+.date, .time {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	width: 10rem;
+}
+
+
+.textarea {
+	height: 100%;
+	resize: none;
+	overflow-y: scroll;
+	font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+}
+
+.btn {
+	flex: 0 0 3.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 3rem;
+	margin: 0 0.5rem;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 0 4px 0 #dcdcdc;
+	outline: 0px solid rgba(118, 178, 228, 0.3);
+	background-color: #fff;
+
+	&:hover {
+		background-color: rgba(118, 178, 228, 0.1);
+		outline: 2px solid rgba(118, 178, 228, 0.3);
+		cursor: pointer;
+	}
+}
+
+.paragraph {
+	height: 100%;
+	white-space: pre-wrap;
+	overflow-y: scroll;
+	font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
 }

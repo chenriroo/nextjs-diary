@@ -9,6 +9,7 @@ export default function formatTime(arrInput) {
 		
 		if(month <10) month = `0${month}`;
 		if(day <10) day = `0${day}`;
+		if(hour<10) hour = `0${hour}`
 		if(minutes<10) minutes = `0${minutes}`
 
 		const date = `${year}-${month}-${day}`

@@ -1,12 +1,16 @@
 .navigation {
 	display: flex;
+	width: 100%;
 	flex-flow: column;
 	justify-content: center;
-	background-color: lightcoral;
+	background-color: #414141;
 }
 
 .menubar {
+	flex: 0 0 3rem;
 	display: flex;
 	flex-flow: row;
 	justify-content: center;
+	z-index: 10;
+	background-color: #414141;
 }
