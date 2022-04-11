@@ -2,13 +2,12 @@ import { useEffect } from "react"
 import styles from "../styles/EntryPreview.module.scss"
 
 export default function EntryPreview({
-		entry, isActive, handleSelectEntry, handleCreateEntry, toggleActiveDay
+		entry, handleSelectEntry, handleCreateEntry, toggleActiveDay
 	}) {
 	
 
 	function handleClick(e) {
 		if(e.target.dataset.fn === 'select') {
-			toggleActiveDay(e, entry.day)
 			handleSelectEntry(e,entry)
 		} else if(e.target.dataset.fn === 'create') {
 			handleCreateEntry(entry.day)

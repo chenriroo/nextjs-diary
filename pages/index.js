@@ -97,6 +97,7 @@ export default function Home() {
 				inputDate={inputDate}
 				entries={entries}
 				isFetching={isFetching}
+				curEntry={curEntry.day}
 			/>
 		</div>
 	)

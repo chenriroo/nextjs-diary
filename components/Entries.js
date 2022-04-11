@@ -70,16 +70,11 @@ const prepareData = (entries) => {
 }
 
 export default function Entries({
-	entries, handleSelectEntry, handleCreateEntry, isFetching
+	entries, handleSelectEntry, handleCreateEntry, isFetching, curEntry
 	}) {
-
-	const [activeDay, setActiveDay] = useState(null);
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
 
-	function toggleActiveDay(e, day) {
-		console.log('Entries.toggleActiveDay()')
-		setActiveDay(day)	
-	}
+	console.log(curEntry)
 
 	useEffect(() => {
 		setArrData(prepareData(entries))
@@ -96,8 +91,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						toggleActiveDay={toggleActiveDay}
-						isActive={activeDay===entry.day ? true : false}
+						isActive={curEntry===entry.day ? true : false}
 					/>
 				))}
 			</div>
@@ -109,8 +103,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						toggleActiveDay={toggleActiveDay}
-						isActive={activeDay===entry.day ? true : false}
+						isActive={curEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
@@ -122,8 +115,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						toggleActiveDay={toggleActiveDay}
-						isActive={activeDay===entry.day ? true : false}
+						isActive={curEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
@@ -135,8 +127,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						toggleActiveDay={toggleActiveDay}
-						isActive={activeDay===entry.day ? true : false}
+						isActive={curEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
@@ -148,15 +139,14 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						toggleActiveDay={toggleActiveDay}
-						isActive={activeDay===entry.day ? true : false}
+						isActive={curEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
 
 			
 			
-			{isFetching && <Loading text="entries"/>}
+			<Loading isFetching={isFetching} />
 
 
 

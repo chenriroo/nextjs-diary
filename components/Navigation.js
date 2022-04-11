@@ -4,7 +4,7 @@ import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching
+	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching, curEntry
 }) {
 	const [isHidden, setMenu] = useState(false)
 	
@@ -20,6 +20,7 @@ export default function Navigation({
 				handleCreateEntry={handleCreateEntry}
 				isFetching={isFetching}
 				isHidden={isHidden}
+				curEntry={curEntry}
 			/>
 
 			<div className={styles.menubar}>
