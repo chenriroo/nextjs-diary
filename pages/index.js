@@ -38,10 +38,10 @@ export default function Home() {
 			})
 		})
 		const data = await res.json();
-		console.log(data)
 		const formattedEntryObj = formatTime([data])
 		setCurEntry(...formattedEntryObj)
-		setCurEntries([...entries, ...formattedEntryObj])
+		setCurEntries(oldArr => [...oldArr, ...formattedEntryObj])
+		
 	}
 
 	function handleSelectEntry(e,entry) {
@@ -69,12 +69,12 @@ export default function Home() {
 	}
 
 	async function deleteEntry(id) {
-		console.log('delete:',id)
 		await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/entries/${id}`, {
 			method: 'DELETE',
 		})
 		setCurEntry({});
-		setCurEntries(entries)
+		const foo = curEntries.filter(entry => entry.id !== id)
+		setCurEntries(foo)
 	}
 
 	// Update the state without fetching whenever we POST/DELETE/PUT
@@ -104,7 +104,7 @@ export default function Home() {
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
 				inputDate={inputDate}
-				entries={curEntries}
+				curEntries={curEntries}
 				isFetching={isFetching}
 				curEntry={curEntry.day}
 				curDate={curDate}

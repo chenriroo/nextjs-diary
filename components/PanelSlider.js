@@ -3,7 +3,7 @@ import DatePicker from './Datepicker';
 import Entries from './Entries';
 
 export default function SliderMenu({
-	entries, inputDate, handleSelectEntry, handleCreateEntry, isFetching, isHidden, curEntry, curDate
+	curEntries, inputDate, handleSelectEntry, handleCreateEntry, isFetching, isHidden, curEntry, curDate
 	}) {
 
 	return (
@@ -12,7 +12,7 @@ export default function SliderMenu({
 			<DatePicker inputDate={inputDate} />
 
 			<Entries 
-				entries={entries}
+				curEntries={curEntries}
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
 				isFetching={isFetching}

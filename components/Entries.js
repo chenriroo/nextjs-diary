@@ -70,14 +70,14 @@ const prepareData = (entries) => {
 }
 
 export default function Entries({
-	entries, handleSelectEntry, handleCreateEntry, isFetching, curEntry, curDate
+	curEntries, handleSelectEntry, handleCreateEntry, isFetching, curEntry, curDate
 	}) {
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
 	const [activeEntry, setActiveEntry] = useState(0) // 
 	
 	useEffect(() => { // Fetched data
-		setArrData(prepareData(entries))
-	},[entries])
+		setArrData(prepareData(curEntries))
+	},[curEntries])
 
 	useEffect(() => { // Selected an entry
 		setActiveEntry(curEntry)
@@ -86,6 +86,7 @@ export default function Entries({
 	useEffect(() => { // Date changed: remove active entry
 		setActiveEntry(0)
 	},[curDate])
+
 
 	return (
 		

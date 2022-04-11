@@ -4,7 +4,7 @@ import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching, curEntry, curDate
+	handleSelectEntry, handleCreateEntry, inputDate, curEntries, isFetching, curEntry, curDate
 }) {
 	const [isHidden, setMenu] = useState(false)
 
@@ -12,7 +12,7 @@ export default function Navigation({
 		<nav className={styles.navigation}>
 
 			<PanelSlider
-				entries={entries}
+				curEntries={curEntries}
 				inputDate={inputDate}
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
