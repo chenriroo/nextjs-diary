@@ -13,6 +13,7 @@ export default function Home() {
 	})
 	const [isFetching, entries] = useFetchEntries(curDate)
 	const [curEntry, setCurEntry] = useState({})
+	const [curEntries, setCurEntries] = useState(entries)
 
 	function inputDate(e) {
 		const target = e.target;
@@ -37,8 +38,10 @@ export default function Home() {
 			})
 		})
 		const data = await res.json();
+		console.log(data)
 		const formattedEntryObj = formatTime([data])
 		setCurEntry(...formattedEntryObj)
+		setCurEntries([...entries, ...formattedEntryObj])
 	}
 
 	function handleSelectEntry(e,entry) {
@@ -71,7 +74,13 @@ export default function Home() {
 			method: 'DELETE',
 		})
 		setCurEntry({});
+		setCurEntries(entries)
 	}
+
+	// Update the state without fetching whenever we POST/DELETE/PUT
+	useEffect(() => {
+		setCurEntries(entries)
+	},[entries])
 
 	return (
 		<div className={styles.container}>
@@ -95,9 +104,10 @@ export default function Home() {
 				handleSelectEntry={handleSelectEntry}
 				handleCreateEntry={handleCreateEntry}
 				inputDate={inputDate}
-				entries={entries}
+				entries={curEntries}
 				isFetching={isFetching}
 				curEntry={curEntry.day}
+				curDate={curDate}
 			/>
 		</div>
 	)

@@ -4,11 +4,9 @@ import styles from '../styles/Navigation.module.scss'
 import PanelSlider from './PanelSlider'
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching, curEntry
+	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching, curEntry, curDate
 }) {
 	const [isHidden, setMenu] = useState(false)
-	
-	console.log(isHidden)
 
 	return (
 		<nav className={styles.navigation}>
@@ -21,6 +19,7 @@ export default function Navigation({
 				isFetching={isFetching}
 				isHidden={isHidden}
 				curEntry={curEntry}
+				curDate={curDate}
 			/>
 
 			<div className={styles.menubar}>

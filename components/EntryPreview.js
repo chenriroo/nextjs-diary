@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import styles from "../styles/EntryPreview.module.scss"
 
 export default function EntryPreview({
-		entry, handleSelectEntry, handleCreateEntry, toggleActiveDay
+		entry, handleSelectEntry, handleCreateEntry, isActive
 	}) {
 	
 
@@ -14,12 +14,10 @@ export default function EntryPreview({
 		}
 	}
 
-	//console.log(entry.day, isActive)
-
 	let html;
 	if(entry.type === "single") {
 		html = 
-		<div className={styles.entryPreview}>
+		<div className={`${styles.entryPreview} ${isActive ? styles.active : ''}`}>
 		
 			<span className={styles.entryPreview__day}>{entry.day}</span>
 			<span 
@@ -37,7 +35,7 @@ export default function EntryPreview({
 		</div>
 	} else if (entry.type === "multi") {
 		html = 
-		<div className={styles.entryPreview}>
+		<div className={`${styles.entryPreview} ${isActive ? styles.active : ''}`}>
 			<span className={styles.entryPreview__day}>{entry.day}</span>
 			<span className={styles.entryPreview__content}>
 				<select className={styles.entryPreview__dropdown} onClick={(e) => handleClick(e)}>
@@ -55,7 +53,7 @@ export default function EntryPreview({
 		</div>
 	} else if (entry.type === "empty") {
 		html = 
-		<div className={`${styles.entryPreview} ${styles.entryPreviewEmpty}`}>
+		<div className={`${styles.entryPreview} ${styles.entryPreviewEmpty} ${isActive ? styles.active : ''}`}>
 			<span className={styles.entryPreview__day}>{entry.day}</span>
 			<span 
 					className={styles.entryPreview__content}

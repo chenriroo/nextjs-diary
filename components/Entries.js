@@ -70,15 +70,22 @@ const prepareData = (entries) => {
 }
 
 export default function Entries({
-	entries, handleSelectEntry, handleCreateEntry, isFetching, curEntry
+	entries, handleSelectEntry, handleCreateEntry, isFetching, curEntry, curDate
 	}) {
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
-
-	console.log(curEntry)
-
-	useEffect(() => {
+	const [activeEntry, setActiveEntry] = useState(0) // 
+	
+	useEffect(() => { // Fetched data
 		setArrData(prepareData(entries))
 	},[entries])
+
+	useEffect(() => { // Selected an entry
+		setActiveEntry(curEntry)
+	},[curEntry])
+
+	useEffect(() => { // Date changed: remove active entry
+		setActiveEntry(0)
+	},[curDate])
 
 	return (
 		
@@ -91,7 +98,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						isActive={curEntry===entry.day ? true : false}
+						isActive={activeEntry===entry.day ? true : false}
 					/>
 				))}
 			</div>
@@ -103,7 +110,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						isActive={curEntry===entry.day ? true : false}
+						isActive={activeEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
@@ -115,7 +122,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						isActive={curEntry===entry.day ? true : false}
+						isActive={activeEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
@@ -127,7 +134,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						isActive={curEntry===entry.day ? true : false}
+						isActive={activeEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>
@@ -139,7 +146,7 @@ export default function Entries({
 						entry={entry}
 						handleSelectEntry={handleSelectEntry}
 						handleCreateEntry={handleCreateEntry}
-						isActive={curEntry===entry.day ? true : false}
+						isActive={activeEntry===entry.day ? true : false}
 					/>
 					))}
 			</div>

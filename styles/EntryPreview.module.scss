@@ -65,6 +65,10 @@
 		
 		&:hover { background-color: rgba(118, 178, 228, 0.3); }
 	}
+}
 
-
+.active {
+	opacity: 1;
+	background-color: rgba(118, 228, 213, 0.1);
+	outline: 2px solid rgba(118, 178, 228, 0.3);
 }
