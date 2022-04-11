@@ -45,7 +45,16 @@ export default function Home() {
 	}
 
 	function handleSelectEntry(e,entry) {
-		setCurEntry(entry)
+		const tag = e.target.tagName;
+		if(tag === 'SPAN') {
+			setCurEntry(entry)
+		} else if(tag === 'SELECT') {
+			const selectedID = Number(e.target.value);
+			const objEntry = curEntries.filter(entry => entry.id === selectedID)
+			setCurEntry(...objEntry)
+		}
+		
+		
 	}
 
 	async function updateEntry(input) {

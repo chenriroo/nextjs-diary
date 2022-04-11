@@ -38,9 +38,9 @@ export default function EntryPreview({
 		<div className={`${styles.entryPreview} ${isActive ? styles.active : ''}`}>
 			<span className={styles.entryPreview__day}>{entry.day}</span>
 			<span className={styles.entryPreview__content}>
-				<select className={styles.entryPreview__dropdown} onClick={(e) => handleClick(e)}>
+				<select className={styles.entryPreview__dropdown} onChange={(e) => handleClick(e)} data-fn="select">
 					{entry.entries.map(entry => (
-						<option key={entry.id}>{entry.time}</option>
+						<option key={entry.id} value={entry.id}>{entry.time}</option>
 					))}
 				</select>
 			</span>
