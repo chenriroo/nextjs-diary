@@ -42,7 +42,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 
 	if(entry.type == "empty") {
 		htmlEmpty =
-			<div>Nothing to see here</div>
+			<div>Create an entry via the datepicker</div>
 		console.log('No entry so display something else')
 	} else if(isEditing) {
 		htmlEntry =
@@ -74,7 +74,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 
 	return (
 		<div className={styles.entry}>
-			{htmlSettings}
+			{entry.type === 'empty' ? '' : htmlSettings}
 			{entry.type === 'empty' ? htmlEmpty : htmlEntry}
 		</div>
 	)
