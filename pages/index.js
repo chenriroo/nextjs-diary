@@ -72,9 +72,17 @@ export default function Home() {
 			body: JSON.stringify(objNewEntry)
 		})
 		const data = await res.json();
+		const [updatedEntryObj] = formatTime([data])
 
-		const formattedEntryObj = formatTime([data])
-		setCurEntry(...formattedEntryObj)
+		const updatedCurEntries = curEntries.map(entry => {
+			if(entry.id === updatedEntryObj.id) return updatedEntryObj;
+			return entry
+		})
+
+		setCurEntry(updatedEntryObj)
+		setCurEntries(updatedCurEntries)
+
+		
 	}
 
 	async function deleteEntry(id) {
@@ -82,8 +90,8 @@ export default function Home() {
 			method: 'DELETE',
 		})
 		setCurEntry({});
-		const foo = curEntries.filter(entry => entry.id !== id)
-		setCurEntries(foo)
+		const filteredCurEntries = curEntries.filter(entry => entry.id !== id)
+		setCurEntries(filteredCurEntries)
 	}
 
 	// Update the state without fetching whenever we POST/DELETE/PUT
