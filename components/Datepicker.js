@@ -78,7 +78,7 @@ export default function DatePicker({ inputDate, curDate }) {
 			role="listbox">
 				
 				<span className={styles.dropdownSelected}>{curDate.year}</span>
-				<span className={styles.dropdownIcon}>+</span>
+				<div className={styles.arrow}></div>
 
 				<div className={`${styles.dropdownOptions} ${!inputYearIsOpen && styles.hidden}`}>
 					{years.map((year,i) => <div key={year} data-value={year} className={styles.dropdownOption} onClick={handleInputYear}>{year}</div>)}
@@ -93,7 +93,7 @@ export default function DatePicker({ inputDate, curDate }) {
 			role="listbox">
 				
 				<span className={styles.dropdownSelected}>{months[Number(curDate.month)]}</span>
-				<span className={styles.dropdownIcon}>+</span>
+				<div className={styles.arrow}></div>
 
 				<div className={`${styles.dropdownOptions} ${!inputMonthIsOpen && styles.hidden}`}>
 					{months.map((month,i) => <div key={i} data-value={i} className={styles.dropdownOption} onClick={handleInputMonth}>{month}</div>)}
@@ -105,6 +105,8 @@ export default function DatePicker({ inputDate, curDate }) {
 }
 
 /*
+<span className={styles.dropdownIcon}></span>
+
 
 <label>Year</label>
 <select className={styles.dropdown} name="year" onClick={inputDate}>
