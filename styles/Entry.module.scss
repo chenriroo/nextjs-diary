@@ -6,7 +6,7 @@
 	padding: 2rem;
 	margin: 0 0 2rem 0;
 	background-color: #fff;
-	box-shadow: 0 0 7px 0 rgb(220 220 220);
+	box-shadow: 0 10px 20px #dcdcdc;
 	
 	@media screen and(min-width: 900px) {
 		width: 50rem;
@@ -29,6 +29,7 @@
 .date, .time {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	width: 10rem;
+	border: none;
 }
 
 
@@ -38,6 +39,7 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 	font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+	border: none;
 }
 
 .btn {
@@ -49,7 +51,7 @@
 	margin: 0 0.5rem;
 	border: none;
 	border-radius: 3px;
-	box-shadow: 0 0 4px 0 #dcdcdc;
+	box-shadow: 0 0 3px 0 #dcdcdc;
 	outline: 0px solid rgba(118, 178, 228, 0.3);
 	background-color: #fff;
 

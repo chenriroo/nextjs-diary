@@ -5,11 +5,11 @@ import Entries from './Entries';
 
 export default function Navigation({
 	handleSelectEntry, handleCreateEntry, inputDate, curEntries, isFetching,
-	curEntry, curDate
+	curEntry, curDate, menuIsOpen, setMenuIsOpen
 }) {
-	const [menuIsOpen, setMenuIsOpen] = useState(true)
-	const fooRef = useRef();
 	
+	const fooRef = useRef();
+
 	useEffect(() => {
 		if(menuIsOpen) {
 			document.addEventListener('mousedown', handleClickOutside)
@@ -22,11 +22,13 @@ export default function Navigation({
 	}, [menuIsOpen])
 
 	function handleClickOutside(e) {
-		//console.log(fooRef.current)
 		if(fooRef.current && fooRef.current.contains(e.target)) {
 			return
 		}
-		setMenuIsOpen(false);
+		setTimeout(() => {
+			setMenuIsOpen(false);
+		}, 250);
+		
 	}
 
 	function handleClickNav() {
@@ -36,15 +38,7 @@ export default function Navigation({
 
 	return (
 		<nav 
-		className={`${styles.navigation} ${!menuIsOpen && styles.navigationCollapsed}`}
-		>
-
-			<div 
-			className={`${styles.menubar} ${!menuIsOpen && styles.menubarCollapsed}`}
-			onClick={handleClickNav}> 
-				<div className={`${styles.icon} ${menuIsOpen && styles.hidden} `}></div>
-			</div>
-
+		className={`${styles.navigation} ${!menuIsOpen && styles.navigationCollapsed}`}>
 
 			<div className={styles.picker} ref={fooRef} >
 				<DatePicker inputDate={inputDate} curDate={curDate}/>
@@ -59,12 +53,6 @@ export default function Navigation({
 				/>
 			</div>
 
-			<div className={`${styles.menubarBottom} ${!menuIsOpen && styles.hidden}`}>
-				<div className={styles.icon}></div>
-			</div>
-
 		</nav>
 	)
 }
-
-// ${menuIsOpen && styles.hidden}

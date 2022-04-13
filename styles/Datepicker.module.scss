@@ -6,7 +6,8 @@
 	padding: 1rem;
 	width: 100%;
 	background-color: #f9f9f9;
-	box-shadow: 0 0 5px 0 #dcdcdc;
+	border-top: rgb(228, 228, 228) 2px solid;
+	box-shadow: 0 -15px 25px 0px #3c3c3c12;
 	
 }
 
@@ -18,7 +19,7 @@
 	margin: 0 1rem;
 	border-radius: 4px;
 	background-color: #fff;
-	box-shadow: 0 0 5px 0 #dcdcdc;
+	box-shadow: 0 0 3px 0 #dcdcdc;
 	cursor: default;
 
 	&:hover .arrow { border-top: 8px solid rgba(0, 0, 0, 0.6); }
@@ -51,10 +52,10 @@
 	position: absolute;
 	width: 9rem;
 	max-height: 15rem;
-	transform: translate(-1rem,9rem);
+	transform: translate(-1rem,9.2rem);
 	padding: 0rem;
 	background-color: #fff;
-	box-shadow: 0 0 5px 0 #dcdcdc;
+	box-shadow: 0 10px 20px #dcdcdc;
 	overflow-y: scroll;
 	z-index: 20;
 	cursor: pointer;

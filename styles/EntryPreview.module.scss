@@ -11,7 +11,7 @@
 	cursor: default;
 	border-radius: 4px;
 	outline: 0px solid rgba(118, 178, 228, 0.3);
-	box-shadow: 0 0 7px 0 rgb(220 220 220);
+	box-shadow: 0 0 3px 0 rgb(220 220 220);
 	opacity: 1;
 	transition: all 0.1s ease-in;
 
@@ -28,6 +28,7 @@
 		opacity: 1;
 		background-color: rgba(118, 178, 228, 0.1);
 		outline: 2px solid rgba(118, 178, 228, 0.3);
+		box-shadow: 0 0 4px 0 rgb(190, 190, 190);
 	}
 
 	&:hover &__day { opacity: 0; }

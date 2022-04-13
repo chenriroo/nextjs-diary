@@ -20,45 +20,6 @@
 	}
 }
 
-.menubar {
-	flex: 0 0 0.5rem;
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-	z-index: 10;
-	background-color: rgba(83, 131, 170, 1);
-	opacity: 1;
-	transition: all 0.2s 0s;
-
-	@media screen and(min-width: 900px) {
-		position: relative;
-		flex: 0 0 0.3rem;
-	}
-}
-
-.menubarCollapsed { 
-	flex: 0 0 3rem;
-	background-color: rgba(83, 131, 170, 1);
-
-	@media screen and(min-width: 900px) {
-
-	}
-}
-
-.menubarBottom {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 3rem;
-	width: 100%;
-	background-color: rgba(83, 131, 170, 1);
-
-	@media screen and(min-width: 900px) {
-		display: none;
-	}
-}
-
 .icon,
 .icon::before,
 .icon::after {

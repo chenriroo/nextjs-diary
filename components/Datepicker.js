@@ -74,7 +74,9 @@ export default function DatePicker({ inputDate, curDate }) {
 				<div className={`${styles.dropdownOptions} ${!inputYearIsOpen && styles.hidden}`}>
 					{years.map((year,i) => <div key={year} data-value={year} className={styles.dropdownOption} onClick={handleInputYear}>{year}</div>)}
 				</div>
+
 			</div>
+
 
 			<div
 			className={`${styles.dropdown} ${inputMonthIsOpen && styles.dropdownActive}`}
@@ -88,6 +90,7 @@ export default function DatePicker({ inputDate, curDate }) {
 				<div className={`${styles.dropdownOptions} ${!inputMonthIsOpen && styles.hidden}`}>
 					{months.map((month,i) => <div key={i} data-value={i} className={styles.dropdownOption} onClick={handleInputMonth}>{month}</div>)}
 				</div>
+
 			</div>
 
 		</div>

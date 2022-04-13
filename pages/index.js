@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Entry from '../components/Entry'
 import Navigation from '../components/Navigation'
+import Toolbar from '../components/Toolbar'
 import styles from '../styles/Home.module.scss'
 import formatTime from '../utils/formatTime'
 import useFetchEntries from '../utils/fetcher'
@@ -15,6 +16,7 @@ export default function Home() {
 	const [isFetching, entries] = useFetchEntries(curDate)
 	const [curEntry, setCurEntry] = useState({})
 	const [curEntries, setCurEntries] = useState(entries)
+	const [menuIsOpen, setMenuIsOpen] = useState(true)
 	
 	function inputDate(val, type) {
 		setCurDate({
@@ -124,7 +126,17 @@ export default function Home() {
 				isFetching={isFetching}
 				curEntry={curEntry.day}
 				curDate={curDate}
+				menuIsOpen={menuIsOpen}
+				setMenuIsOpen={setMenuIsOpen}
 			/>
+
+			<Toolbar
+				curEntries={curEntries}
+				menuIsOpen={menuIsOpen}
+				setMenuIsOpen={setMenuIsOpen}
+			/>
+
+			
 		</div>
 	)
 }
