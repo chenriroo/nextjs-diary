@@ -27,7 +27,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 
 
 	const htmlSettings = 
-		<div className={styles.entry__settings}>
+		<div className={styles.settingsContainer}>
 			<button 
 				className={styles.btn}
 				onClick={() => setEditMode(!isEditing)}>
@@ -46,7 +46,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 		console.log('No entry so display something else')
 	} else if(isEditing) {
 		htmlEntry =
-			<form className={styles.entry__content}>
+			<form className={styles.entryContent}>
 				<input type="date"
 					className={styles.date}
 					readOnly
@@ -66,14 +66,14 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 			</form>
 	} else if(!isEditing) {
 		htmlEntry = 
-		<div className={styles.entry__content}>
+		<div className={styles.entryContent}>
 			<h2>{date}, {time}</h2>
 			<p className={styles.paragraph}>{content}</p>
 		</div>
 	}
 
 	return (
-		<div className={styles.entry}>
+		<div className={styles.entryContainer}>
 			{entry.type === 'empty' ? '' : htmlSettings}
 			{entry.type === 'empty' ? htmlEmpty : htmlEntry}
 		</div>

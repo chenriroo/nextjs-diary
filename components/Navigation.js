@@ -37,15 +37,16 @@ export default function Navigation({
 	return (
 		<nav 
 		className={`${styles.navigation} ${!menuIsOpen && styles.navigationCollapsed}`}
-		ref={fooRef}>
+		>
 
 			<div 
 			className={`${styles.menubar} ${!menuIsOpen && styles.menubarCollapsed}`}
 			onClick={handleClickNav}> 
+				<div className={`${styles.icon} ${menuIsOpen && styles.hidden} `}></div>
 			</div>
 
 
-			<div className={styles.picker} >
+			<div className={styles.picker} ref={fooRef} >
 				<DatePicker inputDate={inputDate} curDate={curDate}/>
 
 				<Entries 
@@ -58,8 +59,12 @@ export default function Navigation({
 				/>
 			</div>
 
-
+			<div className={`${styles.menubarBottom} ${!menuIsOpen && styles.hidden}`}>
+				<div className={styles.icon}></div>
+			</div>
 
 		</nav>
 	)
 }
+
+// ${menuIsOpen && styles.hidden}

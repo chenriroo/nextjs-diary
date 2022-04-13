@@ -1,14 +1,28 @@
 .entries {
 	flex: 1;
 	display: flex;
-	height: 40rem;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	width: 100%;
+	overflow-x: scroll;
 
+	@media screen and(min-width: 900px) {
+		justify-content: center;
+		overflow: visible;
+	}
 
-	&__column {
-		padding: 1rem 0.5rem;
+}
+
+.column {
+	display: flex;
+	position:relative;
+	flex-flow: column;
+	padding: 1rem 0.5rem;
+	flex: 0 0 50%;
+
+	@media screen and(min-width: 900px) {
+		flex-flow: column;
+		flex: 0 0 0;
 	}
 }
 

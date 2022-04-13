@@ -92,7 +92,7 @@ export default function Entries({
 		
 		<div className={styles.entries}>
 
-			<div className={styles.entries__column}>
+			<div className={styles.column}>
 				{arrData[0].map((entry) => (
 					<EntryPreview 
 						key={entry.day}
@@ -104,7 +104,7 @@ export default function Entries({
 				))}
 			</div>
 
-			<div className={styles.entries__column}>
+			<div className={styles.column}>
 				{arrData[1].map((entry) => (
 					<EntryPreview 
 						key={entry.day}
@@ -116,7 +116,7 @@ export default function Entries({
 					))}
 			</div>
 
-			<div className={styles.entries__column}>
+			<div className={styles.column}>
 				{arrData[2].map((entry) => (
 						<EntryPreview 
 						key={entry.day}
@@ -128,7 +128,7 @@ export default function Entries({
 					))}
 			</div>
 
-			<div className={styles.entries__column}>
+			<div className={styles.column}>
 				{arrData[3].map((entry) => (
 						<EntryPreview 
 						key={entry.day}
@@ -140,7 +140,7 @@ export default function Entries({
 					))}
 			</div>
 
-			<div className={styles.entries__column}>
+			<div className={styles.column}>
 				{arrData[4].map((entry) => (
 						<EntryPreview 
 						key={entry.day}

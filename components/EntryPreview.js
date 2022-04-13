@@ -72,6 +72,6 @@ export default function EntryPreview({
 	} 
 
 	return (
-		<div>{html}</div>
+		<div className={styles.container}>{html}</div>
 	)
 }
