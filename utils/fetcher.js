@@ -7,7 +7,12 @@ export default function useFetchEntries(curDate) {
 
 	useEffect(function fetching() {
 		(async function() {
-			const date = `${curDate.year}-${curDate.month}`;			
+
+			// format month from jsDate to JSON
+			let month = Number(curDate.month) + 1
+			month < 10 ? month=`0${month}`: month=month.toString()
+
+			const date = `${curDate.year}-${month}`;			
 			setFetching(true);
 			const res = await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/entries?date_like=${date}`);
 			const data = await res.json();

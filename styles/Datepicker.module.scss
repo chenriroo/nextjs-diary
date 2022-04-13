@@ -1,4 +1,5 @@
 .datepicker {
+	flex: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -10,9 +11,53 @@
 }
 
 .dropdown {
-	padding:0.5rem;
-	background-color: #fff;
-	border: none;
+	display: flex;
+	width: 9rem;
+	padding: 1rem;
+	margin: 0 1rem;
 	border-radius: 4px;
+	background-color: #fff;
 	box-shadow: 0 0 5px 0 #dcdcdc;
+	cursor: default;
+}
+
+.dropdownActive {
+	outline: 2px solid rgba(68, 168, 250, 0.445);
+}
+
+.dropdownSelected {
+	flex: 1;
+}
+
+.dropdownIcon {
+	flex: 0 0 1rem;
+}
+
+
+.dropdownOptions {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	width: 9rem;
+	max-height: 15rem;
+	transform: translate(-1rem,2rem);
+	padding: 0rem;
+	background-color: #fff;
+	box-shadow: 0 0 5px 0 #dcdcdc;
+	overflow-y: scroll;
+	z-index: 20;
+	cursor: pointer;
+}
+
+.dropdownOption {
+	display: flex;
+	padding: 0.5rem;
+
+	&:hover {
+		background-color: rgba(118, 178, 228, 0.1);
+	}
+}
+
+.hidden {
+	display: none;
 }

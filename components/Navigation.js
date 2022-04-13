@@ -1,30 +1,64 @@
-import { useState } from 'react'
-
+import { useState, useEffect, useRef } from 'react'
 import styles from '../styles/Navigation.module.scss'
-import PanelSlider from './PanelSlider'
+import DatePicker from './Datepicker';
+import Entries from './Entries';
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, entries, isFetching
+	handleSelectEntry, handleCreateEntry, inputDate, curEntries, isFetching,
+	curEntry, curDate
 }) {
-	const [isHidden, setMenu] = useState(false)
+	const [menuIsOpen, setMenuIsOpen] = useState(true)
+	const fooRef = useRef();
 	
-	console.log(isHidden)
+	useEffect(() => {
+		if(menuIsOpen) {
+			document.addEventListener('mousedown', handleClickOutside)
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+	}, [menuIsOpen])
+
+	function handleClickOutside(e) {
+		//console.log(fooRef.current)
+		if(fooRef.current && fooRef.current.contains(e.target)) {
+			return
+		}
+		setMenuIsOpen(false);
+	}
+
+	function handleClickNav() {
+		console.log('handleClickNav')
+		setMenuIsOpen(!menuIsOpen)
+	}
 
 	return (
-		<nav className={styles.navigation}>
+		<nav 
+		className={`${styles.navigation} ${!menuIsOpen && styles.navigationCollapsed}`}
+		ref={fooRef}>
 
-			<PanelSlider
-				entries={entries}
-				inputDate={inputDate}
-				handleSelectEntry={handleSelectEntry}
-				handleCreateEntry={handleCreateEntry}
-				isFetching={isFetching}
-				isHidden={isHidden}
-			/>
-
-			<div className={styles.menubar}>
-				<button onClick={() => setMenu(!isHidden)}>Entries</button>
+			<div 
+			className={`${styles.menubar} ${!menuIsOpen && styles.menubarCollapsed}`}
+			onClick={handleClickNav}> 
 			</div>
+
+
+			<div className={styles.picker} >
+				<DatePicker inputDate={inputDate} curDate={curDate}/>
+
+				<Entries 
+					curEntries={curEntries}
+					handleSelectEntry={handleSelectEntry}
+					handleCreateEntry={handleCreateEntry}
+					isFetching={isFetching}
+					curEntry={curEntry}
+					curDate={curDate}
+				/>
+			</div>
+
+
 
 		</nav>
 	)
