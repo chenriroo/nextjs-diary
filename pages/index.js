@@ -7,19 +7,19 @@ import formatTime from '../utils/formatTime'
 import useFetchEntries from '../utils/fetcher'
 
 export default function Home() {
+
 	const [curDate, setCurDate] = useState({
 		year: `${new Date().getFullYear()}`,
-		month: `${new Date().getMonth()}`
+		month: `${new Date().getMonth()}` 	// Save as JS Date format: 0-11 - format in fetch
 	})
 	const [isFetching, entries] = useFetchEntries(curDate)
 	const [curEntry, setCurEntry] = useState({})
 	const [curEntries, setCurEntries] = useState(entries)
 	
-	function inputDate(e) {
-		const target = e.target;
+	function inputDate(val, type) {
 		setCurDate({
 			...curDate,
-			[target.name]: target.value
+			[type]: val
 		})
 	}
 

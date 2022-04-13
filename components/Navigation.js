@@ -22,9 +22,8 @@ export default function Navigation({
 	}, [menuIsOpen])
 
 	function handleClickOutside(e) {
-		console.log(fooRef.current)
+		//console.log(fooRef.current)
 		if(fooRef.current && fooRef.current.contains(e.target)) {
-			console.log('inside click')
 			return
 		}
 		setMenuIsOpen(false);
@@ -34,8 +33,6 @@ export default function Navigation({
 		console.log('handleClickNav')
 		setMenuIsOpen(!menuIsOpen)
 	}
-
-	console.log(menuIsOpen)
 
 	return (
 		<nav 
@@ -49,7 +46,7 @@ export default function Navigation({
 
 
 			<div className={styles.picker} >
-				<DatePicker inputDate={inputDate} />
+				<DatePicker inputDate={inputDate} curDate={curDate}/>
 
 				<Entries 
 					curEntries={curEntries}
