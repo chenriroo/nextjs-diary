@@ -34,15 +34,6 @@ export default function DatePicker({ inputDate, curDate }) {
 		inputDate(dataVal, 'year')
 	}
 
-	function handleToggleYear() {
-		setToggleYear(!inputYearIsOpen)
-	}
-
-	function handleToggleMonth() {
-		setToggleMonth(!inputMonthIsOpen)
-	}
-
-
 	useEffect(() => {
 		
 		if(inputYearIsOpen || inputMonthIsOpen) {
@@ -73,7 +64,7 @@ export default function DatePicker({ inputDate, curDate }) {
 
 			<div 
 			className={`${styles.dropdown} ${inputYearIsOpen && styles.dropdownActive}`} 
-			onClick={handleToggleYear}
+			onClick={()=>setToggleYear(!inputYearIsOpen)}
 			ref={selectYearRef}
 			role="listbox">
 				
@@ -85,10 +76,9 @@ export default function DatePicker({ inputDate, curDate }) {
 				</div>
 			</div>
 
-
 			<div
 			className={`${styles.dropdown} ${inputMonthIsOpen && styles.dropdownActive}`}
-			onClick={handleToggleMonth}
+			onClick={()=>setToggleMonth(!inputMonthIsOpen)}
 			ref={selectMonthRef}
 			role="listbox">
 				
@@ -103,30 +93,3 @@ export default function DatePicker({ inputDate, curDate }) {
 		</div>
 	)
 }
-
-/*
-<span className={styles.dropdownIcon}></span>
-
-
-<label>Year</label>
-<select className={styles.dropdown} name="year" onClick={inputDate}>
-	{generateYears().map((year,index) => (<option key={index} value={year}>{year}</option>))}
-</select>
-
-<label>Month</label>
-<select className={styles.dropdown} name="month" onClick={inputDate}>
-	<option value="01">January</option>
-	<option value="02">February</option>
-	<option value="03">March</option>
-	<option value="04">April</option>
-	<option value="05">May</option>
-	<option value="06">June</option>
-	<option value="07">July</option>
-	<option value="08">August</option>
-	<option value="09">September</option>
-	<option value="10">October</option>
-	<option value="11">November</option>
-	<option value="12">December</option>
-</select>
-
-*/
