@@ -13,7 +13,7 @@ export default function EntryPreview({
 	}
 
 	let html;
-	if(entry.type === "single") {
+	if(entry.type === "single" || entry.type === "multi") {
 		html = 
 		<div className={`${styles.entryPreview} ${isActive ? styles.active : ''}`}>
 		
@@ -22,28 +22,7 @@ export default function EntryPreview({
 			className={`${styles.entryPreview__content} `}
 			onClick={(e) => handleClick(e)}
 			data-fn="select">
-					single
-			</span>
-			<span 
-			className={styles.entryPreview__create}
-			onClick={(e) => handleClick(e)}
-			data-fn="create">
-				+
-			</span>
-		</div>
-	} else if (entry.type === "multi") {
-		html = 
-		<div className={`${styles.entryPreview} ${isActive ? styles.active : ''}`}>
-			<span className={styles.entryPreview__day}>{entry.day}</span>
-			<span className={styles.entryPreview__content}>
-				<select
-				className={styles.entryPreview__dropdown} 
-				onChange={(e) => handleClick(e)} 
-				data-fn="select">
-					{entry.entries.map(entry => (
-						<option key={entry.id} value={entry.id}>{entry.time}</option>
-					))}
-				</select>
+				{entry.type === "single" ? "single" : "multi"}
 			</span>
 			<span 
 			className={styles.entryPreview__create}
