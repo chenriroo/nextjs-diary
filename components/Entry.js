@@ -20,37 +20,40 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	}
 
 	useEffect(() => {
-		// split content in maximum chars for pages
-		let content = entry.content;
-		if(content.length > 4000) {
-			console.log('length > 4000')
-			const half = content.length / 2;
-			console.log(content.length, half)
-		}
-
-
 		// state
+		console.log(entry)
 		setContent(entry.content)
 		setTime(entry.time)
 		setDate(entry.date)
 	},[entry])
 
 
-	const htmlSettings = 
-		<div className={styles.settingsContainer}>
-			<button 
-				className={styles.btn}
-				onClick={() => setEditMode(!isEditing)}>
-					{isEditing ? "View" : "Edit"}
-				</button>
-			<button
-				className={styles.btn}
-				onClick={() => deleteEntry(entry.id)}>
-				Delete
-			</button>
-		</div>
+	const htmlToolbar = 
+		<div className={styles.containerEntryToolbar}>
 
-	
+			<div className={styles.containerDateTime}>
+				<span className={styles.date}>{date}</span>
+				<input type="time" 
+					className={styles.editTime}
+					value={entry.time}
+					onChange={(e) => setTime(e.target.value)}>
+				</input>
+			</div>
+
+			<div className={styles.containerSettings}>
+				<button 
+					className={styles.btn}
+					onClick={() => setEditMode(!isEditing)}>
+						{isEditing ? "View" : "Edit"}
+					</button>
+				<button
+					className={styles.btn}
+					onClick={() => deleteEntry(entry.id)}>
+					Delete
+				</button>
+			</div>
+
+		</div>
 
 	if(entry.type == "empty") {
 		htmlEmpty =
@@ -59,16 +62,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	} else if(isEditing) {
 		htmlEntry =
 			<form className={styles.entryContent}>
-				<input type="date"
-					className={styles.date}
-					readOnly
-					value={entry.date}>
-				</input>
-				<input type="time" 
-					className={styles.time}
-					value={entry.time}
-					onChange={(e) => setTime(e.target.value)}>
-				</input>
+
 				<textarea 
 					className={styles.textarea}
 					value={content}
@@ -79,17 +73,15 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	} else if(!isEditing) {
 		htmlEntry = 
 		<div className={styles.entryContent}>
-			<div className={styles.containerEntryToolbar}>
-				<h2>{date}, {time}</h2>
-				{entry.type === 'empty' ? '' : htmlSettings}
-			</div>
-			
 			<p className={styles.paragraph}>{content}</p>
 		</div>
 	}
 
 	return (
 		<div className={styles.entryContainer}>
+
+			{entry.type === 'empty' ? '' : htmlToolbar}
+
 			{entry.type === 'empty' ? htmlEmpty : htmlEntry}
 		</div>
 	)
