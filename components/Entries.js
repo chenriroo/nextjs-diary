@@ -70,7 +70,7 @@ const prepareData = (entries) => {
 }
 
 export default function Entries({
-	curEntries, handleSelectEntry, handleCreateEntry, isFetching, curEntry, curDate
+	curEntries, setCurEntry, handleCreateEntry, isFetching, curEntry, curDate
 	}) {
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
 	const [activeEntry, setActiveEntry] = useState(0) // 
@@ -97,7 +97,7 @@ export default function Entries({
 					<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						handleSelectEntry={handleSelectEntry}
+						setCurEntry={setCurEntry}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
 					/>
@@ -109,7 +109,7 @@ export default function Entries({
 					<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						handleSelectEntry={handleSelectEntry}
+						setCurEntry={setCurEntry}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
 					/>
@@ -121,7 +121,7 @@ export default function Entries({
 						<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						handleSelectEntry={handleSelectEntry}
+						setCurEntry={setCurEntry}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
 					/>
@@ -133,7 +133,7 @@ export default function Entries({
 						<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						handleSelectEntry={handleSelectEntry}
+						setCurEntry={setCurEntry}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
 					/>
@@ -145,7 +145,7 @@ export default function Entries({
 						<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						handleSelectEntry={handleSelectEntry}
+						setCurEntry={setCurEntry}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
 					/>

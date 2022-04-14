@@ -1,12 +1,12 @@
 import styles from '../styles/Toolbar.module.scss'
 
-export default function Toolbar({ curEntries, menuIsOpen, setMenuIsOpen }) {
+export default function Toolbar({ curEntries, menuIsOpen, setMenuIsOpen, isMultiEntry }) {
 
 	return (
 		<div className={styles.container}>
 
 
-			<div className={styles.btnContainer}>
+			<div className={`${styles.btnContainer} ${!isMultiEntry && styles.hidden}`}>
 				<div 
 				className={styles.iconHamburger}
 				onClick={()=>setMenuIsOpen(!menuIsOpen)}>
@@ -19,7 +19,7 @@ export default function Toolbar({ curEntries, menuIsOpen, setMenuIsOpen }) {
 				<div className={styles.iconHamburger}></div>
 			</div>
 
-			<div className={styles.btnContainer}>
+			<div className={`${styles.btnContainer} ${!isMultiEntry && styles.hidden}`}>
 				<div 
 				className={styles.iconHamburger}
 				onClick={()=>setMenuIsOpen(!menuIsOpen)}>

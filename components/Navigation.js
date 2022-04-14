@@ -4,7 +4,7 @@ import DatePicker from './Datepicker';
 import Entries from './Entries';
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, curEntries, isFetching,
+	setCurEntry, handleCreateEntry, inputDate, curEntries, isFetching,
 	curEntry, curDate, menuIsOpen, setMenuIsOpen
 }) {
 	
@@ -27,7 +27,7 @@ export default function Navigation({
 		}
 		setTimeout(() => {
 			setMenuIsOpen(false);
-		}, 250);
+		}, 200);
 		
 	}
 
@@ -45,7 +45,7 @@ export default function Navigation({
 
 				<Entries 
 					curEntries={curEntries}
-					handleSelectEntry={handleSelectEntry}
+					setCurEntry={setCurEntry}
 					handleCreateEntry={handleCreateEntry}
 					isFetching={isFetching}
 					curEntry={curEntry}

@@ -8,7 +8,6 @@ import formatTime from '../utils/formatTime'
 import useFetchEntries from '../utils/fetcher'
 
 export default function Home() {
-
 	const [curDate, setCurDate] = useState({
 		year: `${new Date().getFullYear()}`,
 		month: `${new Date().getMonth()}` 	// Save as JS Date format: 0-11 - format in fetch
@@ -17,6 +16,7 @@ export default function Home() {
 	const [curEntry, setCurEntry] = useState({})
 	const [curEntries, setCurEntries] = useState(entries)
 	const [menuIsOpen, setMenuIsOpen] = useState(true)
+	const [isMultiEntry, setIsMultiEntry] = useState(false)
 	
 	function inputDate(val, type) {
 		setCurDate({
@@ -44,17 +44,6 @@ export default function Home() {
 		setCurEntry(...formattedEntryObj)
 		setCurEntries(oldArr => [...oldArr, ...formattedEntryObj])
 		
-	}
-
-	function handleSelectEntry(e,entry) {
-		const tag = e.target.tagName;
-		if(tag === 'SPAN') {
-			setCurEntry(entry)
-		} else if(tag === 'SELECT') {
-			const selectedID = Number(e.target.value);
-			const objEntry = curEntries.filter(entry => entry.id === selectedID)
-			setCurEntry(...objEntry)
-		}
 	}
 
 	async function updateEntry(input) {
@@ -114,12 +103,14 @@ export default function Home() {
 					updateEntry={updateEntry}
 					deleteEntry={deleteEntry}
 					isFetching={isFetching}
+					isMultiEntry={isMultiEntry}
+					setIsMultiEntry={setIsMultiEntry}
 				/> : undefined }
 					
 			
 			
 			<Navigation 
-				handleSelectEntry={handleSelectEntry}
+				setCurEntry={setCurEntry}
 				handleCreateEntry={handleCreateEntry}
 				inputDate={inputDate}
 				curEntries={curEntries}
@@ -134,6 +125,7 @@ export default function Home() {
 				curEntries={curEntries}
 				menuIsOpen={menuIsOpen}
 				setMenuIsOpen={setMenuIsOpen}
+				isMultiEntry={isMultiEntry}
 			/>
 
 			
