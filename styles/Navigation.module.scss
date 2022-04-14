@@ -8,18 +8,12 @@
 	transition: transform 0.2s;
 
 	@media screen and(min-width: 900px) {
-		max-height: 50%;
+		height: 35rem;
 		bottom: 3rem;
 	}
 }
 
-.navigationCollapsed {
-	transform:translateY(96%);
-
-	@media screen and(min-width: 900px) {
-		transform:translateY(92%);
-	}
-}
+.navigationCollapsed { transform:translateY(100%); }
 
 .icon,
 .icon::before,

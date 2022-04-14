@@ -20,6 +20,16 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	}
 
 	useEffect(() => {
+		// split content in maximum chars for pages
+		let content = entry.content;
+		if(content.length > 4000) {
+			console.log('length > 4000')
+			const half = content.length / 2;
+			console.log(content.length, half)
+		}
+
+
+		// state
 		setContent(entry.content)
 		setTime(entry.time)
 		setDate(entry.date)
@@ -39,6 +49,8 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 				Delete
 			</button>
 		</div>
+
+	
 
 	if(entry.type == "empty") {
 		htmlEmpty =
@@ -67,14 +79,17 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching }) {
 	} else if(!isEditing) {
 		htmlEntry = 
 		<div className={styles.entryContent}>
-			<h2>{date}, {time}</h2>
+			<div className={styles.containerEntryToolbar}>
+				<h2>{date}, {time}</h2>
+				{entry.type === 'empty' ? '' : htmlSettings}
+			</div>
+			
 			<p className={styles.paragraph}>{content}</p>
 		</div>
 	}
 
 	return (
 		<div className={styles.entryContainer}>
-			{entry.type === 'empty' ? '' : htmlSettings}
 			{entry.type === 'empty' ? htmlEmpty : htmlEntry}
 		</div>
 	)

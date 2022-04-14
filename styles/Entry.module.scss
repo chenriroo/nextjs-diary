@@ -7,12 +7,13 @@
 	margin: 0 0 2rem 0;
 	background-color: #fff;
 	box-shadow: 0 10px 20px #0000000f;
-	background-image:
-	linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-	linear-gradient(#eee .1em, transparent .1em);
+	background-image: linear-gradient(#abced438 0.1em, transparent 0.1em);
 	background-size: 100% 1.5em;
 	
 	@media screen and(min-width: 900px) {
+		background-image: 
+			linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+			linear-gradient(#abced438 0.1em, transparent 0.1em);
 		width: 50rem;
 		padding: 0rem 2rem 0rem 6rem;
 		margin: 3rem 0 6rem 0;
@@ -23,6 +24,11 @@
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+}
+
+.containerEntryToolbar {
+	display: flex;
+	justify-content: space-between;
 }
 
 .settingsContainer {
@@ -75,4 +81,11 @@
 	overflow-y: scroll;
 	overflow-x: hidden;
 	font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+
+	line-height: 24px;
+    margin-top: 0;
+
+	@media screen and(min-width: 900px) {
+		margin-top: 9px;
+	}
 }
