@@ -17,12 +17,17 @@ export default function Home() {
 	const [curEntries, setCurEntries] = useState(entries)
 	const [menuIsOpen, setMenuIsOpen] = useState(true)
 	const [isMultiEntry, setIsMultiEntry] = useState(false)
-	
+	const [multiEntryPage, setMultiEntryPage] = useState(0);
+
 	function inputDate(val, type) {
 		setCurDate({
 			...curDate,
 			[type]: val
 		})
+	}
+
+	function browseMultiEntry() {
+
 	}
 
 	async function handleCreateEntry(day) {
@@ -105,6 +110,7 @@ export default function Home() {
 					isFetching={isFetching}
 					isMultiEntry={isMultiEntry}
 					setIsMultiEntry={setIsMultiEntry}
+					multiEntryPage={multiEntryPage}
 				/> : undefined }
 					
 			
@@ -125,7 +131,10 @@ export default function Home() {
 				curEntries={curEntries}
 				menuIsOpen={menuIsOpen}
 				setMenuIsOpen={setMenuIsOpen}
+				curEntry={curEntry}
 				isMultiEntry={isMultiEntry}
+				multiEntryPage={multiEntryPage}
+				setMultiEntryPage={setMultiEntryPage}
 			/>
 
 			

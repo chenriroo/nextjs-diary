@@ -1,7 +1,7 @@
 import { useState, useEffect, useReducer} from "react";
 import styles from "../styles/Entry.module.scss"
 
-export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isMultiEntry, setIsMultiEntry }) {
+export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isMultiEntry, setIsMultiEntry, multiEntryPage }) {
 	const [isEditing, setEditMode] = useState(false);
 	const [multiEntry, setMultiEntry] = useState({})
 	const [date, setDate] = useState("");
@@ -20,34 +20,33 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 		})
 	}
 
-	function browseMultiEntry() {
-
-	}
-
 	useEffect(() => {
 		if(entry.type === "multi") {
 			setIsMultiEntry(true)
 			setMultiEntry(entry)
+			setContent(entry.entries[multiEntryPage].content)
+			setTime(entry.entries[multiEntryPage].time)
+			setDate(entry.entries[multiEntryPage].date)
+			return
 			
 		} else {
 			setIsMultiEntry(false)
+			setContent(entry.content)
+			setTime(entry.time)
+			setDate(entry.date)
 		}
-
-		setContent(entry.content)
-		setTime(entry.time)
-		setDate(entry.date)
-	},[entry, setIsMultiEntry])
+	},[entry, setIsMultiEntry, multiEntryPage, multiEntry])
 
 	const htmlToolbar = 
 		<div className={styles.containerEntryToolbar}>
 
 			<div className={styles.containerDateTime}>
 				<span className={styles.date}>
-					{isMultiEntry ? multiEntry.entries[0].date : date}
+					{date}
 				</span>
 				<input type="time" 
 					className={styles.editTime}
-					value={isMultiEntry ? multiEntry.entries[0].time : time}
+					value={time}
 					onChange={(e) => setTime(e.target.value)}>
 				</input>
 			</div>
@@ -77,7 +76,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 
 				<textarea 
 					className={styles.textarea}
-					value={isMultiEntry ? multiEntry.entries[0].content : content}
+					value={content}
 					onChange={(e) => setContent(e.target.value)}>
 				</textarea>
 				<button onClick={(e) => handleUpdate(e)}>Update</button>
@@ -86,7 +85,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 		htmlEntry = 
 		<div className={styles.entryContent}>
 			<p className={styles.paragraph}>
-				{isMultiEntry ? multiEntry.entries[0].content : content}
+				{content}
 			</p>
 		</div>
 	}

@@ -3,55 +3,56 @@ import EntryPreview from "./EntryPreview"
 import Loading from "./Loading";
 import styles from "../styles/Entries.module.scss"
 
-// Find a way to add 'type:'single' to days that have a single entry
+// Creates object for days with entry or multiple entries
 const filterDayMultiEntries = (entries) => {
-	const objDays = [];	// array with object of a day with multiple entries
+	const objMultiDays = [];	// array with days with multiple entries
+	const objSingleDays = [] // array with days with single entries
 	const arrDays = []; // Array with day(s) having multiple entries
 	for(let i=1; i<=31; i++) {
-		let multiEntry={
+		let objEntry={
 			day: i,
-			type: 'multi', 
+			type: '', 
 			entries: []
 		};
 		entries.filter(entry => {
-			if(entry.day === i) multiEntry.entries.push(entry)	
+			if(entry.day === i) objEntry.entries.push(entry)	
 		})
-		if(multiEntry.entries.length>1) {
-			objDays.push(multiEntry);
-			arrDays.push(multiEntry.day)
+		if(objEntry.entries.length===0) continue
+		if(objEntry.entries.length>1) {
+			objEntry.type = 'multi'
+			objMultiDays.push(objEntry);
+			arrDays.push(objEntry.day);
+		} else {
+			objEntry.type = 'single'
+			objSingleDays.push(objEntry);
 		}
 	}
-	return [arrDays, objDays];
+
+	return [arrDays, objMultiDays, objSingleDays];
 }
 
 const prepareData = (entries) => {
-	const arr1=[], arr2=[], arr3=[], arr4=[], arr5=[];
+	const arr1=[], arr2=[], arr3=[], arr4=[], arr5=[]; // each array holds a 7 days max
 	
-	const existingDays = new Set(entries.map(entry => entry.day)); // Get day(s) with entry
+	const existingDays = new Set(entries.map(entry => entry.day)); // Day(s) with entry
 	const arrPlaceholders = [];
 	for(let i=1; i<=31; i++) {	// Create empty entry object for days without entry
 		if(existingDays.has(i)) continue
 		arrPlaceholders.push({
-			id: "",
 			day: i,
-			date: "",
-			time: "",
-			content: "",
-			type: 'empty'
+			type: 'empty',
+			entries: [],
 		})
 	}
 
-	const [arrDaysMultipleEntries, arrObjectsDaysMultipleEntries] = filterDayMultiEntries(entries);
-
-	const arrEntries = entries
-		.filter(entry => !arrDaysMultipleEntries.includes(entry.day))
-		.concat(arrObjectsDaysMultipleEntries, arrPlaceholders)
+	const [arrDaysMultipleEntries, arrObjectsDaysMultipleEntries, arrObjectsDaysSingleEntry] = filterDayMultiEntries(entries);
+	
+	const arrEntries = []
+		.concat(arrObjectsDaysSingleEntry, arrObjectsDaysMultipleEntries, arrPlaceholders)
 		.sort((a,b) => a.day-b.day)
-		.map(entry => {
-			if(!entry.hasOwnProperty('type')) {
-				return { ...entry, type: 'single' }
-			} else return { ...entry }
-		} )
+
+		console.log(arrEntries)
+
 
 	arrEntries.forEach(entry => {
 		if(entry.day <=7) {
@@ -66,6 +67,8 @@ const prepareData = (entries) => {
 			arr5.push(entry)
 		}
 	})
+
+
 	return [arr1,arr2,arr3,arr4,arr5]
 }
 
