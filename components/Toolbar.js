@@ -19,7 +19,7 @@ export default function Toolbar({ curEntries, menuIsOpen, setMenuIsOpen, curDayO
 		<div className={styles.container}>
 
 			<div
-			className={styles.btnContainer}
+			className={`${styles.btnContainer} ${!isMultiEntry && styles.btnContainerInactive}`}
 			data-browse="previous"
 			onClick={browseMultiEntry}>
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@ export default function Toolbar({ curEntries, menuIsOpen, setMenuIsOpen, curDayO
 			</div>
 
 			<div
-			className={styles.btnContainer}
+			className={`${styles.btnContainer} ${!isMultiEntry && styles.btnContainerInactive}`}
 			data-browse="next"
 			onClick={browseMultiEntry}>
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

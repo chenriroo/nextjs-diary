@@ -21,6 +21,12 @@
 	}
 }
 
+.btnContainerInactive {
+	&:hover {
+		background-color: rgba(122, 192, 219, 0);
+	}
+}
+
 .btnActive {
 	background-color: rgb(101, 211, 255);
 }
