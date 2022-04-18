@@ -19,8 +19,6 @@ export default function Home() {
 	const [isMultiEntry, setIsMultiEntry] = useState(false)
 	const [entriesIndex, setEntriesIndex] = useState(0);
 
-	console.log(curDayObj)
-
 	function inputDate(val, type) {
 		setCurDate({
 			...curDate,
