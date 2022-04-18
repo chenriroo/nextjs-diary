@@ -1,14 +1,15 @@
 import styles from "../styles/EntryPreview.module.scss"
 
 export default function EntryPreview({
-		entry, setCurEntry, handleCreateEntry, isActive
+		entry, setCurDayObj, handleCreateEntry, isActive, setEntriesIndex
 	}) {
 	
 	function handleClick(e) {
 		if(e.target.dataset.fn === 'select') {
-			setCurEntry(entry)
+			setCurDayObj(entry);
+			setEntriesIndex(0);
 		} else if(e.target.dataset.fn === 'create') {
-			handleCreateEntry(entry.day)
+			handleCreateEntry(entry); //entry.day
 		}
 	}
 

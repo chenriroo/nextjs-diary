@@ -12,12 +12,12 @@ export default function Home() {
 		year: `${new Date().getFullYear()}`,
 		month: `${new Date().getMonth()}` 	// Save as JS Date format: 0-11 - format in fetch
 	})
-	const [isFetching, entries] = useFetchEntries(curDate)
-	const [curEntry, setCurEntry] = useState({})
-	const [curEntries, setCurEntries] = useState(entries)
+	const [isFetching, fetchedEntries] = useFetchEntries(curDate)
+	const [curDayObj, setCurDayObj] = useState({entries: []})
+	const [curEntries, setCurEntries] = useState([])
 	const [menuIsOpen, setMenuIsOpen] = useState(true)
 	const [isMultiEntry, setIsMultiEntry] = useState(false)
-	const [multiEntryPage, setMultiEntryPage] = useState(0);
+	const [entriesIndex, setEntriesIndex] = useState(0);
 
 	function inputDate(val, type) {
 		setCurDate({
@@ -26,11 +26,7 @@ export default function Home() {
 		})
 	}
 
-	function browseMultiEntry() {
-
-	}
-
-	async function handleCreateEntry(day) {
+	async function handleCreateEntry(dayObj) {
 		let hours = new Date().getHours();
 		let minutes = new Date().getMinutes();
 
@@ -40,20 +36,32 @@ export default function Home() {
 				'content-type': 'application/json'
 			},
 			body: JSON.stringify({
-				date: new Date(curDate.year, curDate.month-1, day, hours, minutes),
+				date: new Date(curDate.year, curDate.month, dayObj.day, hours, minutes),
 				content: ""
 			})
-		})
+		});
 		const data = await res.json();
-		const formattedEntryObj = formatTime([data])
-		setCurEntry(...formattedEntryObj)
-		setCurEntries(oldArr => [...oldArr, ...formattedEntryObj])
+		const [newEntryObj] = formatTime([data]);
+
 		
+		const newEntriesArr = [...dayObj.entries, newEntryObj];
+
+		// TODO
+		setCurDayObj({
+			day: dayObj.day, 
+			type: newEntriesArr.length === 1 ? 'single' : 'multi',
+			entries: newEntriesArr
+		})
+		setCurEntries([...curEntries, newEntryObj]);
+		setEntriesIndex(newEntriesArr.length-1);
 	}
 
+
+	// TODO: Update to take in multi array
 	async function updateEntry(input) {
+
 		const strDate = new Date(`${input.date} ${input.time}`)
-		const objNewEntry = {
+		const updatedEntry = {
 			date: strDate,
 			content: input.content
 		}
@@ -63,35 +71,52 @@ export default function Home() {
 			headers: {
 				'content-type': 'application/json'
 			},
-			body: JSON.stringify(objNewEntry)
+			body: JSON.stringify(updatedEntry)
 		})
 		const data = await res.json();
-		const [updatedEntryObj] = formatTime([data])
+		const [updatedEntryObj] = formatTime([data]) //returns single entry obj
 
+		// TODO refactor
+		// for curEntries
 		const updatedCurEntries = curEntries.map(entry => {
 			if(entry.id === updatedEntryObj.id) return updatedEntryObj;
 			return entry
 		})
 
-		setCurEntry(updatedEntryObj)
-		setCurEntries(updatedCurEntries)
+		// for curDayObj
+		const newArrEntries = curDayObj.entries.map(entry => {
+			if(entry.id === updatedEntryObj.id) return updatedEntryObj;
+			return entry
+		})
 
+		setCurEntries(updatedCurEntries)
+		setCurDayObj({
+			day: updatedEntryObj.day, 
+			type: updatedEntryObj.type,
+			entries: newArrEntries
+		})
 		
 	}
 
 	async function deleteEntry(id) {
+		if(entriesIndex > 0) setEntriesIndex(entriesIndex-1);
+		const filteredCurDayEntries = curDayObj.entries.filter(entry => entry.id !== id);
+		setCurDayObj({...curDayObj, entries: filteredCurDayEntries});
+		
+		const filteredCurEntries = curEntries.filter(entry => entry.id !== id);
+		setCurEntries(filteredCurEntries);
+
 		await fetch(`https://chenriroo-json-server-heroku.herokuapp.com/entries/${id}`, {
 			method: 'DELETE',
-		})
-		setCurEntry({});
-		const filteredCurEntries = curEntries.filter(entry => entry.id !== id)
-		setCurEntries(filteredCurEntries)
+		});
 	}
 
-	// Update the state without fetching whenever we POST/DELETE/PUT
+
+
+	//Update the state with fetched entries
 	useEffect(() => {
-		setCurEntries(entries)
-	},[entries])
+		setCurEntries(fetchedEntries)
+	},[fetchedEntries, isFetching])
 
 	return (
 		<div className={styles.container}>
@@ -102,39 +127,40 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			{Object.keys(curEntry).length > 0 ? 
+			{curDayObj.entries.length > 0 ? 
 				<Entry 
-					entry={curEntry}
+					curDayObj={curDayObj}
 					updateEntry={updateEntry}
 					deleteEntry={deleteEntry}
-					isFetching={isFetching}
 					isMultiEntry={isMultiEntry}
 					setIsMultiEntry={setIsMultiEntry}
-					multiEntryPage={multiEntryPage}
+					entriesIndex={entriesIndex}
+					setEntriesIndex={setEntriesIndex}
 				/> : undefined }
 					
 			
 			
 			<Navigation 
-				setCurEntry={setCurEntry}
+				setCurDayObj={setCurDayObj}
 				handleCreateEntry={handleCreateEntry}
 				inputDate={inputDate}
 				curEntries={curEntries}
 				isFetching={isFetching}
-				curEntry={curEntry.day}
+				curDayObj={curDayObj.day}
 				curDate={curDate}
 				menuIsOpen={menuIsOpen}
 				setMenuIsOpen={setMenuIsOpen}
+				setEntriesIndex={setEntriesIndex}
 			/>
 
 			<Toolbar
 				curEntries={curEntries}
 				menuIsOpen={menuIsOpen}
 				setMenuIsOpen={setMenuIsOpen}
-				curEntry={curEntry}
+				curDayObj={curDayObj}
 				isMultiEntry={isMultiEntry}
-				multiEntryPage={multiEntryPage}
-				setMultiEntryPage={setMultiEntryPage}
+				entriesIndex={entriesIndex}
+				setEntriesIndex={setEntriesIndex}
 			/>
 
 			

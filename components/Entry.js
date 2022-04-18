@@ -1,9 +1,11 @@
 import { useState, useEffect, useReducer} from "react";
 import styles from "../styles/Entry.module.scss"
 
-export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isMultiEntry, setIsMultiEntry, multiEntryPage }) {
+export default function Entry(
+	{ curDayObj, updateEntry, deleteEntry, isMultiEntry, setIsMultiEntry, entriesIndex }
+	) {
+	
 	const [isEditing, setEditMode] = useState(false);
-	const [multiEntry, setMultiEntry] = useState({})
 	const [date, setDate] = useState("");
 	const [time, setTime] = useState("");
 	const [content, setContent] = useState("");
@@ -13,7 +15,7 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 	function handleUpdate(e) {
 		e.preventDefault();
 		updateEntry({
-			id: entry.id,
+			id: curDayObj.entries[entriesIndex].id,
 			date: date,
 			time: time,
 			content: content
@@ -21,21 +23,18 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 	}
 
 	useEffect(() => {
-		if(entry.type === "multi") {
-			setIsMultiEntry(true)
-			setMultiEntry(entry)
-			setContent(entry.entries[multiEntryPage].content)
-			setTime(entry.entries[multiEntryPage].time)
-			setDate(entry.entries[multiEntryPage].date)
-			return
-			
-		} else {
-			setIsMultiEntry(false)
-			setContent(entry.content)
-			setTime(entry.time)
-			setDate(entry.date)
-		}
-	},[entry, setIsMultiEntry, multiEntryPage, multiEntry])
+		curDayObj.type === "single" ? setIsMultiEntry(false) : setIsMultiEntry(true)
+		console.log('useEffect Fired')
+		console.log('Entry entriesIndex', entriesIndex)
+		setContent(curDayObj.entries[entriesIndex].content)
+		setTime(curDayObj.entries[entriesIndex].time)
+		setDate(curDayObj.entries[entriesIndex].date)
+
+		// console.log('Entry obj.entries:', curDayObj.entries)
+		// console.log('Entry entriesIndex', entriesIndex)
+	}, [curDayObj, entriesIndex, setIsMultiEntry])
+
+	
 
 	const htmlToolbar = 
 		<div className={styles.containerEntryToolbar}>
@@ -59,14 +58,14 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 					</button>
 				<button
 					className={styles.btn}
-					onClick={() => deleteEntry(entry.id)}>
+					onClick={() => deleteEntry(curDayObj.entries[entriesIndex].id)}>
 					Delete
 				</button>
 			</div>
 
 		</div>
 
-	if(entry.type == "empty") {
+	if(curDayObj.type == "empty") {
 		htmlEmpty =
 			<div>Create an entry via the datepicker</div>
 		console.log('No entry so display something else')
@@ -92,10 +91,8 @@ export default function Entry({ entry, updateEntry, deleteEntry, isFetching, isM
 
 	return (
 		<div className={styles.entryContainer}>
-
-			{entry.type === 'empty' ? '' : htmlToolbar}
-
-			{entry.type === 'empty' ? htmlEmpty : htmlEntry}
+			{curDayObj.type === 'empty' ? '' : htmlToolbar}
+			{curDayObj.type === 'empty' ? htmlEmpty : htmlEntry}
 		</div>
 	)
 

@@ -36,7 +36,7 @@ const prepareData = (entries) => {
 	
 	const existingDays = new Set(entries.map(entry => entry.day)); // Day(s) with entry
 	const arrPlaceholders = [];
-	for(let i=1; i<=31; i++) {	// Create empty entry object for days without entry
+	for(let i=1; i<=31; i++) {	// Create entry object for days without entry
 		if(existingDays.has(i)) continue
 		arrPlaceholders.push({
 			day: i,
@@ -50,9 +50,6 @@ const prepareData = (entries) => {
 	const arrEntries = []
 		.concat(arrObjectsDaysSingleEntry, arrObjectsDaysMultipleEntries, arrPlaceholders)
 		.sort((a,b) => a.day-b.day)
-
-		console.log(arrEntries)
-
 
 	arrEntries.forEach(entry => {
 		if(entry.day <=7) {
@@ -73,7 +70,7 @@ const prepareData = (entries) => {
 }
 
 export default function Entries({
-	curEntries, setCurEntry, handleCreateEntry, isFetching, curEntry, curDate
+	curEntries, setCurDayObj, handleCreateEntry, isFetching, curDayObj, curDate, setEntriesIndex
 	}) {
 	const [arrData, setArrData] = useState([[],[],[],[],[]])
 	const [activeEntry, setActiveEntry] = useState(0) // 
@@ -83,13 +80,12 @@ export default function Entries({
 	},[curEntries])
 
 	useEffect(() => { // Selected an entry
-		setActiveEntry(curEntry)
-	},[curEntry])
+		setActiveEntry(curDayObj)
+	},[curDayObj])
 
 	useEffect(() => { // Date changed: remove active entry
 		setActiveEntry(0)
 	},[curDate])
-
 
 	return (
 		
@@ -100,9 +96,10 @@ export default function Entries({
 					<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						setCurEntry={setCurEntry}
+						setCurDayObj={setCurDayObj}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
+						setEntriesIndex={setEntriesIndex}
 					/>
 				))}
 			</div>
@@ -112,9 +109,10 @@ export default function Entries({
 					<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						setCurEntry={setCurEntry}
+						setCurDayObj={setCurDayObj}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
+						setEntriesIndex={setEntriesIndex}
 					/>
 					))}
 			</div>
@@ -124,9 +122,10 @@ export default function Entries({
 						<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						setCurEntry={setCurEntry}
+						setCurDayObj={setCurDayObj}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
+						setEntriesIndex={setEntriesIndex}
 					/>
 					))}
 			</div>
@@ -136,9 +135,10 @@ export default function Entries({
 						<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						setCurEntry={setCurEntry}
+						setCurDayObj={setCurDayObj}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
+						setEntriesIndex={setEntriesIndex}
 					/>
 					))}
 			</div>
@@ -148,9 +148,10 @@ export default function Entries({
 						<EntryPreview 
 						key={entry.day}
 						entry={entry}
-						setCurEntry={setCurEntry}
+						setCurDayObj={setCurDayObj}
 						handleCreateEntry={handleCreateEntry}
 						isActive={activeEntry===entry.day ? true : false}
+						setEntriesIndex={setEntriesIndex}
 					/>
 					))}
 			</div>

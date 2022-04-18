@@ -4,8 +4,8 @@ import DatePicker from './Datepicker';
 import Entries from './Entries';
 
 export default function Navigation({
-	setCurEntry, handleCreateEntry, inputDate, curEntries, isFetching,
-	curEntry, curDate, menuIsOpen, setMenuIsOpen
+	setCurDayObj, handleCreateEntry, inputDate, curEntries, isFetching,
+	curDayObj, curDate, menuIsOpen, setMenuIsOpen, setEntriesIndex
 }) {
 	
 	const fooRef = useRef();
@@ -45,11 +45,12 @@ export default function Navigation({
 
 				<Entries 
 					curEntries={curEntries}
-					setCurEntry={setCurEntry}
+					setCurDayObj={setCurDayObj}
 					handleCreateEntry={handleCreateEntry}
 					isFetching={isFetching}
-					curEntry={curEntry}
+					curDayObj={curDayObj}
 					curDate={curDate}
+					setEntriesIndex={setEntriesIndex}
 				/>
 			</div>
 
