@@ -4,12 +4,12 @@ import DatePicker from './Datepicker';
 import Entries from './Entries';
 
 export default function Navigation({
-	handleSelectEntry, handleCreateEntry, inputDate, curEntries, isFetching,
-	curEntry, curDate
+	setCurDayObj, handleCreateEntry, inputDate, curEntries, isFetching,
+	curDayObj, curDate, menuIsOpen, setMenuIsOpen, setEntriesIndex
 }) {
-	const [menuIsOpen, setMenuIsOpen] = useState(true)
-	const fooRef = useRef();
 	
+	const fooRef = useRef();
+
 	useEffect(() => {
 		if(menuIsOpen) {
 			document.addEventListener('mousedown', handleClickOutside)
@@ -22,11 +22,13 @@ export default function Navigation({
 	}, [menuIsOpen])
 
 	function handleClickOutside(e) {
-		//console.log(fooRef.current)
 		if(fooRef.current && fooRef.current.contains(e.target)) {
 			return
 		}
-		setMenuIsOpen(false);
+		setTimeout(() => {
+			setMenuIsOpen(false);
+		}, 200);
+		
 	}
 
 	function handleClickNav() {
@@ -36,29 +38,21 @@ export default function Navigation({
 
 	return (
 		<nav 
-		className={`${styles.navigation} ${!menuIsOpen && styles.navigationCollapsed}`}
-		ref={fooRef}>
+		className={`${styles.navigation} ${!menuIsOpen && styles.navigationCollapsed}`}>
 
-			<div 
-			className={`${styles.menubar} ${!menuIsOpen && styles.menubarCollapsed}`}
-			onClick={handleClickNav}> 
-			</div>
-
-
-			<div className={styles.picker} >
+			<div className={styles.picker} ref={fooRef} >
 				<DatePicker inputDate={inputDate} curDate={curDate}/>
 
 				<Entries 
 					curEntries={curEntries}
-					handleSelectEntry={handleSelectEntry}
+					setCurDayObj={setCurDayObj}
 					handleCreateEntry={handleCreateEntry}
 					isFetching={isFetching}
-					curEntry={curEntry}
+					curDayObj={curDayObj}
 					curDate={curDate}
+					setEntriesIndex={setEntriesIndex}
 				/>
 			</div>
-
-
 
 		</nav>
 	)

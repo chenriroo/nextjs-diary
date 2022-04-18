@@ -1,28 +1,32 @@
 .datepicker {
-	flex: 1;
+	flex: 0 0 5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
 	width: 100%;
 	background-color: #f9f9f9;
-	box-shadow: 0 0 5px 0 #dcdcdc;
+	border-top: #e7e7e7 2px solid;
+	box-shadow: 0 -10px 10px 0px rgb(60 60 60 / 2%)
 	
 }
 
 .dropdown {
 	display: flex;
+	align-items: center;
 	width: 9rem;
 	padding: 1rem;
 	margin: 0 1rem;
 	border-radius: 4px;
 	background-color: #fff;
-	box-shadow: 0 0 5px 0 #dcdcdc;
+	box-shadow: 0 0 3px 0 #dcdcdc;
 	cursor: default;
+
+	&:hover .arrow { border-top: 8px solid rgba(0, 0, 0, 0.6); }
 }
 
 .dropdownActive {
-	outline: 2px solid rgba(68, 168, 250, 0.445);
+	outline: 2px solid rgba(68, 168, 250, 0.4);
 }
 
 .dropdownSelected {
@@ -33,6 +37,14 @@
 	flex: 0 0 1rem;
 }
 
+.arrow {
+	width: 0; 
+	height: 0; 
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 8px solid rgb(0, 0, 0, 0.2);
+}
+
 
 .dropdownOptions {
 	display: flex;
@@ -40,10 +52,10 @@
 	position: absolute;
 	width: 9rem;
 	max-height: 15rem;
-	transform: translate(-1rem,2rem);
+	transform: translate(-1rem,9.2rem);
 	padding: 0rem;
 	background-color: #fff;
-	box-shadow: 0 0 5px 0 #dcdcdc;
+	box-shadow: 0 10px 20px #dcdcdc;
 	overflow-y: scroll;
 	z-index: 20;
 	cursor: pointer;
@@ -54,7 +66,7 @@
 	padding: 0.5rem;
 
 	&:hover {
-		background-color: rgba(118, 178, 228, 0.1);
+		background-color: rgba(118, 178, 228, 0.3);
 	}
 }
 

@@ -1,38 +1,84 @@
-.entry {
+.entryContainer {
 	display: flex;
 	flex-flow: column;
-	width: 50rem;
-	height: 100%;
-	padding: 2rem;
-	margin: 3rem 0 6rem 0;
+	width: 100%;
+	flex: 1;
+	margin: 0 0 2rem 0;
 	background-color: #fff;
-	box-shadow: 0 0 7px 0 rgb(220 220 220);
-
-	&__settings {
-		display: flex;
-		justify-content: flex-end;
-	}
-
-	&__content {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-	}
+	box-shadow: 0 10px 20px #0000000f;
+	background-image: linear-gradient(#abced438 0.1em, transparent 0.1em);
+	background-size: 100% 1.5em;
+	overflow: clip;
 	
+	@media screen and(min-width: 900px) {
+		width: 50rem;
+		margin: 3rem 0 3rem 0;
+	}
+}
+
+.entryContent {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.containerEntryToolbar {
+	display: flex;
+	height: 98px;
+	width: 100%;
+	padding: 0rem 2rem;
+	background-color: #fff;
+	border-radius: 4px 4px 0 0;
+	border-bottom: 2px solid #abced4;
+	justify-content: space-between;
 }
 
 
-.date, .time {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	width: 10rem;
+.containerSettings {
+	display: flex;
+
+	justify-content: flex-end;
+	align-items: center;
 }
 
+.containerDateTime {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+}
+
+.date {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.editTime {
+	font-family: inherit;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: inherit;
+	height: 34px;
+	padding-inline-start: 0;
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+}
 
 .textarea {
 	height: 100%;
 	resize: none;
-	overflow-y: scroll;
-	font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+	margin-top: 4px;
+	padding: 0 1rem;
+	overflow: hidden;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: 24px;
+	border: none;
+	color: inherit;
+	background-color: rgba(255, 255, 255, 0);
+
+	@media screen and (min-width: 900px) {
+		
+	}
 }
 
 .btn {
@@ -44,20 +90,28 @@
 	margin: 0 0.5rem;
 	border: none;
 	border-radius: 3px;
-	box-shadow: 0 0 4px 0 #dcdcdc;
+	box-shadow: 0 0 3px 0 #dcdcdc;
 	outline: 0px solid rgba(118, 178, 228, 0.3);
 	background-color: #fff;
 
 	&:hover {
-		background-color: rgba(118, 178, 228, 0.1);
+		background-color: rgb(177, 216, 248);
 		outline: 2px solid rgba(118, 178, 228, 0.3);
 		cursor: pointer;
 	}
+
+
 }
 
 .paragraph {
 	height: 100%;
 	white-space: pre-wrap;
-	overflow-y: scroll;
-	font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+	overflow: hidden;
+	line-height: 24px;
+	padding: 0rem 1rem;
+    margin-top: 0;
+
+	@media screen and(min-width: 900px) {
+		margin-top: 4px;
+	}
 }
