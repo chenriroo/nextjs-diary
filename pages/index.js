@@ -10,7 +10,7 @@ import useFetchEntries from '../utils/fetcher'
 export default function Home() {
 	const [curDate, setCurDate] = useState({
 		year: `${new Date().getFullYear()}`,
-		month: `${new Date().getMonth()}` 	// Save as JS Date format: 0-11 - format in fetch
+		month: `${new Date().getMonth()}` 	// Save as JS Date format: 0-11 - formatted in fetch
 	})
 	const [isFetching, fetchedEntries] = useFetchEntries(curDate)
 	const [curDayObj, setCurDayObj] = useState({entries: []})
@@ -18,6 +18,8 @@ export default function Home() {
 	const [menuIsOpen, setMenuIsOpen] = useState(true)
 	const [isMultiEntry, setIsMultiEntry] = useState(false)
 	const [entriesIndex, setEntriesIndex] = useState(0);
+
+	console.log(curDayObj)
 
 	function inputDate(val, type) {
 		setCurDate({
@@ -111,9 +113,7 @@ export default function Home() {
 		});
 	}
 
-
-
-	//Update the state with fetched entries
+	//Update the state with fetched entries (per month month)
 	useEffect(() => {
 		setCurEntries(fetchedEntries)
 	},[fetchedEntries, isFetching])
